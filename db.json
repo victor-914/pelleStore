@@ -1,0 +1,60 @@
+{
+  "specimens": [
+    {
+      "_id": "63ff2c112adbe264623df21b",
+      "title": "Osteology of the skull",
+      "catergory": "thorax",
+      "positions": [
+        {
+          "_id": "6r88",
+          "img": "http://res.cloudinary.com/dv538fztp/image/upload/v1677667345/final_year_project/lfy8cbbq15aroxzytduy.png",
+          "postion": "anterior",
+          "title": "Anatomy of the Skull",
+          "header": "content",
+          "descriptions": [
+            {
+              "_id": "74747",
+              "name": "ethmoid",
+              "content": "The anterior skull consists of several key structures, including the frontal bone, ethmoid bone, sphenoid bone, and portions of the temporal and parietal bones. Together, these bones create a sturdy and protective enclosure for the frontal lobes, which are responsible for functions such as voluntary movement, problem-solving, and emotional expression.",
+              "img": "http://res.cloudinary.com/dv538fztp/image/upload/v1677667345/final_year_project/lfy8cbbq15aroxzytduy.png"
+            },
+            {
+              "_id": "47",
+              "name": "ethmoid",
+              "content": "the frontal bone, ethmoid bone, sphenoid bone, and portions of the temporal and parietal bones. Together, these bones create a sturdy and protective enclosure for the frontal lobes, which are responsible for functions such as voluntary movement, problem-solving, and emotional expression.",
+              "img": "http://res.cloudinary.com/dv538fztp/image/upload/v1677667345/final_year_project/lfy8cbbq15aroxzytduy.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_id": "63ff2c112adbe264623df21b",
+      "title": "The Human Heart",
+      "catergory": "thorax",
+      "positions": [
+        {
+          "_id": "6r88",
+          "img": "http://res.cloudinary.com/dv538fztp/image/upload/v1677667345/final_year_project/lfy8cbbq15aroxzytduy.png",
+          "postion": "anterior",
+          "title": "Anatomy of the Skull",
+          "header": "content",
+          "descriptions": [
+            {
+              "_id": "74747",
+              "name": "ethmoid",
+              "content": "The anterior skull consists of several key structures, including the frontal bone, ethmoid bone, sphenoid bone, and portions of the temporal and parietal bones. Together, these bones create a sturdy and protective enclosure for the frontal lobes, which are responsible for functions such as voluntary movement, problem-solving, and emotional expression.",
+              "img": "http://res.cloudinary.com/dv538fztp/image/upload/v1677667345/final_year_project/lfy8cbbq15aroxzytduy.png"
+            },
+            {
+              "_id": "47",
+              "name": "ethmoid",
+              "content": "the frontal bone, ethmoid bone, sphenoid bone, and portions of the temporal and parietal bones. Together, these bones create a sturdy and protective enclosure for the frontal lobes, which are responsible for functions such as voluntary movement, problem-solving, and emotional expression.",
+              "img": "http://res.cloudinary.com/dv538fztp/image/upload/v1677667345/final_year_project/lfy8cbbq15aroxzytduy.png"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
