@@ -29,7 +29,7 @@ function Footer() {
           >
             <Image src={logo} layout="fill" />
           </Box>
-          <div>
+          <div style={{ textAlign: "justify" }}>
             Join us on a journey of limitless possibilities. Experience the
             fusion of creativity and functionality as we redefine what's
             possible.
