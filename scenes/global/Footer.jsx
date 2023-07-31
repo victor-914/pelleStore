@@ -20,7 +20,7 @@ function Footer() {
       >
         <Box width="clamp(20%, 30%, 40%)">
           <Box
-            width="100px" 
+            width="100px"
             height="80px"
             position="relative"
             // backgroundColor="red"
@@ -67,7 +67,7 @@ function Footer() {
           <Typography mb="30px" sx={{ wordWrap: "break-word" }}>
             {/* Email: mredwardroh@gmail.com */}
           </Typography>
-          <Typography mb="30px">07033826580,07052362318</Typography>
+          {/* <Typography mb="30px">07033826580,07052362318</Typography> */}
         </Box>
       </Box>
     </Box>

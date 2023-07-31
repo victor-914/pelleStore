@@ -10,10 +10,10 @@ import { shades } from "../../theme";
 // import imagefour from "../../assets/image4.jpeg";
 // import imagefive from "../../assets/image5.jpeg";
 
-import One from "../../assets/african.jpg";
-import imagetwo from "../../assets/in-small-business.jpg";
-import imagethree from "../../assets/shoes.jpg";
-import imagefour from "../../assets/clothing-store.jpg";
+import One from "../../assets/african-min.webp";
+import imagetwo from "../../assets/in-small-business-min.webp";
+import imagethree from "../../assets/shoes-min.webp";
+import imagefour from "../../assets/clothing-store-min.webp";
 // import imagefive from "../../assets/image5.jpeg";
 // imports all images from assets folder
 // const importAll = (r) =>
