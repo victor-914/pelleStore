@@ -32,8 +32,7 @@ function Footer() {
           <div>
             Join us on a journey of limitless possibilities. Experience the
             fusion of creativity and functionality as we redefine what's
-            possible. From awe-inspiring designs to intuitive user experiences,
-            we're shaping the future, one breakthrough at a time.
+            possible.
           </div>
         </Box>
 
