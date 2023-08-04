@@ -20,7 +20,9 @@ function MyApp({ Component, pageProps }) {
       cart: cartReducer,
     },
   });
-  return (
+
+  const getLayout = Component.getLayout || ((page) => page);
+  return getLayout(
     <>
       <Head>
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />

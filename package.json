@@ -44,6 +44,13 @@
     "react-responsive-carousel": "^3.2.23",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4",
+    "@ant-design/charts": "^1.4.2",
+    "antd": "^5.0.6",
+    "react-dropzone": "^14.2.3",
+    "react-multi-select-component": "^4.3.4",
+    "react-quill": "^2.0.0",
+    "react-select": "^5.7.0",
+    "react-widgets": "^5.8.4",
     "yup": "^0.32.11"
   },
   "devDependencies": {

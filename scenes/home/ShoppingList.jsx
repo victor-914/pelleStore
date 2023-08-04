@@ -27,7 +27,7 @@ const ShoppingList = () => {
   }
 
   useEffect(() => {
-    getItems();
+    // getItems();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const topRatedItems = items.filter(
