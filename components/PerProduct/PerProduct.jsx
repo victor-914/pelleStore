@@ -3,14 +3,14 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import Item from "../../components/Item";
+import Item from "../../components/Item";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../../theme";
 import { addToCart } from "../../state";
 import { useDispatch } from "react-redux";
-import img from "../../assets/banner-02.jpg"
+
 const ItemDetails = () => {
   const dispatch = useDispatch();
   const { itemId } = useParams();
@@ -24,31 +24,31 @@ const ItemDetails = () => {
   };
 
   async function getItem() {
-    // const item = await fetch(
-    //   `http://localhost:2000/api/items/${itemId}?populate=image`,
-    //   {
-    //     method: "GET",
-    //   }
-    // );
-    // const itemJson = await item.json();
-    // setItem(itemJson.data);
+    const item = await fetch(
+      `http://localhost:2000/api/items/${itemId}?populate=image`,
+      {
+        method: "GET",
+      }
+    );
+    const itemJson = await item.json();
+    setItem(itemJson.data);
   }
 
-  // async function getItems() {
-    // const items = await fetch(
-    //   `http://localhost:2000/api/items?populate=image`,
-    //   {
-    //     method: "GET",
-    //   }
-    // );
-    // const itemsJson = await items.json();
-    // setItems(itemsJson.data);
-  // }
+  async function getItems() {
+    const items = await fetch(
+      `http://localhost:2000/api/items?populate=image`,
+      {
+        method: "GET",
+      }
+    );
+    const itemsJson = await items.json();
+    setItems(itemsJson.data);
+  }
 
-  // useEffect(() => {
-  //   getItem();
-  //   getItems();
-  // }, [itemId]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    getItem();
+    getItems();
+  }, [itemId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Box width="80%" m="80px auto">
@@ -59,7 +59,7 @@ const ItemDetails = () => {
             alt={item?.name}
             width="100%"
             height="100%"
-            src={img}
+            src={`http://localhost:2000${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
             style={{ objectFit: "contain" }}
           />
         </Box>
@@ -133,7 +133,7 @@ const ItemDetails = () => {
       </Box>
 
       {/* RELATED ITEMS */}
-      {/* <Box mt="50px" width="100%">
+      <Box mt="50px" width="100%">
         <Typography variant="h3" fontWeight="bold">
           Related Products
         </Typography>
@@ -148,7 +148,7 @@ const ItemDetails = () => {
             <Item key={`${item.name}-${i}`} item={item} />
           ))}
         </Box>
-      </Box> */}
+      </Box>
     </Box>
   );
 };

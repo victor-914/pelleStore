@@ -8,26 +8,17 @@ import { shades } from "../../theme";
 // import imagetwo from "../../assets/image2.jpeg";
 // import imagethree from "../../assets/image3.jpeg";
 // import imagefour from "../../assets/image4.jpeg";
-// import imagefive from "../../assets/image5.jpeg";
 
-import One from "../../assets/african-min.webp";
-import imagetwo from "../../assets/in-small-business-min.webp";
-import imagethree from "../../assets/shoes-min.webp";
-import imagefour from "../../assets/clothing-store-min.webp";
-// import imagefive from "../../assets/image5.jpeg";
-// imports all images from assets folder
-// const importAll = (r) =>
-//   r.keys().reduce((acc, item) => {
-//     acc[item.replace("./", "")] = r(item);
-//     return acc;
-//   }, {});
+import One from "../../assets/slider-01.jpg";
+import imagetwo from "../../assets/slider-02.jpg";
+import imagethree from "../../assets/slider-03.jpg";
+import imagefour from "../../assets/banner-02.jpg";
+import imagefive from "../../assets/banner-03.jpg";
 
-// export const heroTextureImports = importAll(
-//   require.context("../../assets", false, /\.(png|jpe?g|svg)$/)
-// );
+
 
 const MainCarousel = () => {
-  const heroTextureImports = [One, imagetwo, imagethree, imagefour];
+  const heroTextureImports = [One, imagetwo, imagethree, imagefour,imagefive];
   const isNonMobile = useMediaQuery("(min-width:600px)");
   return (
     <Carousel
@@ -76,6 +67,7 @@ const MainCarousel = () => {
               width: "100%",
               height: "700px",
               objectFit: "cover",
+              objectPosition: `${ isNonMobile ?    "5px 0%" : "-700px 0%"}`,
               backgroundAttachment: "fixed",
             }}
           />

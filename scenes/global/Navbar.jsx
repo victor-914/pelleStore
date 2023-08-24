@@ -12,80 +12,167 @@ import { setIsCartOpen } from "../../state";
 import { useRouter } from "next/router";
 import logo from "../../assets/violaLogo.jpeg";
 import Image from "next/image";
+import styled from "styled-components";
+const StyledSecNavBar = styled.section`
+  width: 100%;
+  margin: auto;
+  height: 100px;
+  background-color:#901D78;
+  position: fixed;
+  z-index: 10;
+ 
+
+
+.secBar{
+  display: flex;
+  flex-direction:row;
+  align-items:flex-end;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  /* position: fixed; */
+  /* background-color: red; */
+}
+
+li{
+  font-size: 17px;
+  font-weight: 600;
+  list-style: none;
+  color: #fff;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  /* padding: 10px; */
+  width: 15%;
+  text-align: center;
+  border: 10px solid transparent;
+
+}
+
+  li:hover{
+    background-color: #fff;
+    border: 10px solid #901D78;
+    color: #000; 
+    cursor: pointer;
+  
+  }
+`;
+const secNavbar = [
+  {
+    _id: "hjdhd",
+    content: "New Arrivals",
+    link: "arrivals",
+  },
+  {
+    _id: "hjdhddd",
+    content: "Men",
+    link: "men",
+  },
+  {
+    _id: "hjddjdjdhddd",
+    content: "Women",
+    link: "women",
+  },
+  {
+    _id: "hjdhwwddd",
+    content: "Boys",
+    link: "boys",
+  },
+  {
+    _id: "hjdhdssdd",
+    content: "Girls",
+    link: "girls",
+  },
+  {
+    _id: "hjdddhddd",
+    content: "Accessories",
+    link: "accessories",
+  },
+];
 function Navbar() {
   const navigate = useRouter();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
-
+  const router = useRouter()
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      width="100%"
-      height="60px"
-      backgroundColor="rgba(255, 255, 255, 0.95)"
-      color="black"
-      position="fixed"
-      top="0"
-      left="0"
-      zIndex="1"
-    >
+    <>
+      <StyledSecNavBar className="">
+        <main className="secBar">
+          {
+            secNavbar.map((item) => (
+              <li onClick={() => router.push(`/${item.link}`)}>{item.content}</li>
+            ))
+          }
+        </main>
+      </StyledSecNavBar>
       <Box
-        width="80%"
-        margin="auto"
         display="flex"
-        justifyContent="space-between"
         alignItems="center"
+        width="100%"
+        height="60px"
+        backgroundColor="rgba(255, 255, 255, 0.95)"
+        color="black"
+        position="fixed"
+        top="0"
+        left="0"
+        zIndex="40"
       >
         <Box
-          onClick={() => navigate("/")}
-          sx={{ "&:hover": { cursor: "pointer" } }}
-          color={shades.secondary[500]}
-          width="50px"
-          height="40px"
-          position="relative"
-        >
-          <Image src={logo} layout="fill" />
-        </Box>
-        <Box
+          width="80%"
+          margin="auto"
           display="flex"
           justifyContent="space-between"
-          columnGap="20px"
-          zIndex="2"
+          alignItems="center"
         >
-          <IconButton sx={{ color: "black" }}>
-            <SearchOutlined />
-          </IconButton>
-          <IconButton sx={{ color: "black" }}>
-            <PersonOutline />
-          </IconButton>
-          <Badge
-            badgeContent={cart.length}
-            color="secondary"
-            invisible={cart.length === 0}
-            sx={{
-              "& .MuiBadge-badge": {
-                right: 5,
-                top: 5,
-                padding: "0 4px",
-                height: "14px",
-                minWidth: "13px",
-              },
-            }}
+          <Box
+            onClick={() => router.push("/")}
+            sx={{ "&:hover": { cursor: "pointer" } }}
+            color={shades.secondary[500]}
+            width="50px"
+            height="40px"
+            position="relative"
           >
-            <IconButton
-              onClick={() => dispatch(setIsCartOpen({}))}
-              sx={{ color: "black" }}
-            >
-              <ShoppingBagOutlined />
+            <Image src={logo} layout="fill" />
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            columnGap="20px"
+            zIndex="2"
+          >
+            <IconButton sx={{ color: "black" }}>
+              <SearchOutlined />
             </IconButton>
-          </Badge>
-          <IconButton sx={{ color: "black" }}>
-            <MenuOutlined />
-          </IconButton>
+            <IconButton sx={{ color: "black" }}>
+              <PersonOutline />
+            </IconButton>
+            <Badge
+              badgeContent={cart.length}
+              color="secondary"
+              invisible={cart.length === 0}
+              sx={{
+                "& .MuiBadge-badge": {
+                  right: 5,
+                  top: 5,
+                  padding: "0 4px",
+                  height: "14px",
+                  minWidth: "13px",
+                },
+              }}
+            >
+              <IconButton
+                onClick={() => dispatch(setIsCartOpen({}))}
+                sx={{ color: "black" }}
+              >
+                <ShoppingBagOutlined />
+              </IconButton>
+            </Badge>
+            <IconButton sx={{ color: "black" }}>
+              <MenuOutlined />
+            </IconButton>
+          </Box>
         </Box>
       </Box>
-    </Box>
+    </>
   );
 }
 
