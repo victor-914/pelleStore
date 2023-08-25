@@ -9,16 +9,17 @@ import { shades } from "../../theme";
 // import imagethree from "../../assets/image3.jpeg";
 // import imagefour from "../../assets/image4.jpeg";
 
-import One from "../../assets/slider-01.jpg";
-import imagetwo from "../../assets/slider-02.jpg";
-import imagethree from "../../assets/slider-03.jpg";
-import imagefour from "../../assets/banner-02.jpg";
-import imagefive from "../../assets/banner-03.jpg";
+import One from "../../assets/bannerPic1.jpeg";
+import imagetwo from "../../assets/bannerpic2.jpeg";
+import imagefour from "../../assets/taylor-dG4Eb_oC5iM-unsplash.jpeg";
+import imagefive from "../../assets/brian-lawson-jRztw-pVdyk-unsplash.jpeg";
+import imagesix from "../../assets/diego-vedita-PW1EOs9R-Xw-unsplash.jpeg";
+import imageseven from "../../assets/uji-kanggo-gumilang-sMn0sxR8v2E-unsplash.jpeg";
 
 
 
 const MainCarousel = () => {
-  const heroTextureImports = [One, imagetwo, imagethree, imagefour,imagefive];
+  const heroTextureImports = [One, imagetwo, imagefour, imagefour,imagefive, imagesix, imageseven];
   const isNonMobile = useMediaQuery("(min-width:600px)");
   return (
     <Carousel
@@ -67,13 +68,13 @@ const MainCarousel = () => {
               width: "100%",
               height: "700px",
               objectFit: "cover",
-              objectPosition: `${ isNonMobile ?    "5px 0%" : "-700px 0%"}`,
+              // objectPosition: `${ isNonMobile ?    "5px 0%" : "-700px 0%"}`,
               backgroundAttachment: "fixed",
             }}
           />
           {console.log(texture.src, "texture")}
 
-          <Box
+          {/* <Box
             color="white"
             padding="20px"
             borderRadius="1px"
@@ -85,17 +86,9 @@ const MainCarousel = () => {
             right={isNonMobile ? undefined : "0"}
             margin={isNonMobile ? undefined : "0 auto"}
             maxWidth={isNonMobile ? undefined : "240px"}
-          >
-            <Typography color={shades.secondary[200]}>-- NEW ITEMS</Typography>
-            <Typography variant="h1">Summer Sale</Typography>
-            <Typography
-              fontWeight="bold"
-              color={shades.secondary[300]}
-              sx={{ textDecoration: "underline" }}
-            >
-              Discover More
-            </Typography>
-          </Box>
+          > */}
+          
+          {/* </Box> */}
         </Box>
       ))}
     </Carousel>

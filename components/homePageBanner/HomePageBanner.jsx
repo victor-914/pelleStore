@@ -73,7 +73,6 @@ height:100vh;
 display: flex;
 justify-content: space-between;
 margin: auto;
-padding-top: 30px;
 
 .heroBanner{
   width: 48%;

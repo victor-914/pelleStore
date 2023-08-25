@@ -10,7 +10,8 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../../theme";
 import { addToCart } from "../../state";
 import { useDispatch } from "react-redux";
-import img from "../../assets/banner-02.jpg"
+import img from "../../assets/banner-02.jpg";
+import styled from "styled-components";
 const ItemDetails = () => {
   const dispatch = useDispatch();
   const { itemId } = useParams();
@@ -35,14 +36,14 @@ const ItemDetails = () => {
   }
 
   // async function getItems() {
-    // const items = await fetch(
-    //   `http://localhost:2000/api/items?populate=image`,
-    //   {
-    //     method: "GET",
-    //   }
-    // );
-    // const itemsJson = await items.json();
-    // setItems(itemsJson.data);
+  // const items = await fetch(
+  //   `http://localhost:2000/api/items?populate=image`,
+  //   {
+  //     method: "GET",
+  //   }
+  // );
+  // const itemsJson = await items.json();
+  // setItems(itemsJson.data);
   // }
 
   // useEffect(() => {
@@ -51,7 +52,8 @@ const ItemDetails = () => {
   // }, [itemId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Box width="80%" m="80px auto">
+    <StyledItemsPage>
+    <Box width="80%" m=" auto">
       <Box display="flex" flexWrap="wrap" columnGap="40px">
         {/* IMAGES */}
         <Box flex="1 1 40%" mb="40px">
@@ -60,7 +62,8 @@ const ItemDetails = () => {
             width="100%"
             height="100%"
             src={img}
-            style={{ objectFit: "contain" }}
+            // layout="f"
+            // style={{ objectFit: "contain" }}
           />
         </Box>
 
@@ -72,10 +75,19 @@ const ItemDetails = () => {
           </Box>
 
           <Box m="65px 0 25px 0">
-            <Typography variant="h3">{item?.attributes?.name}</Typography>
+            <Typography variant="h3">
+              {/* {item?.attributes?.name} */}
+              opportunities 
+            </Typography>
             <Typography>${item?.attributes?.price}</Typography>
             <Typography sx={{ mt: "20px" }}>
-              {item?.attributes?.longDescription}
+              {/* {item?.attributes?.longDescription} */}
+              Who is EdRoh? I'm a lead engineer for a publicly traded company
+              and have been developing for a decade now. I'm here to provide you
+              in-depth tutorials by simplifying difficult concepts and more
+              importantly, getting your hands dirty by building production level
+              projects with ease to impress your future/current employer or
+              clients
             </Typography>
           </Box>
 
@@ -150,7 +162,16 @@ const ItemDetails = () => {
         </Box>
       </Box> */}
     </Box>
+     </StyledItemsPage>
   );
 };
 
 export default ItemDetails;
+
+
+ const StyledItemsPage = styled.section`
+  padding-top:80px;
+
+
+
+ `
