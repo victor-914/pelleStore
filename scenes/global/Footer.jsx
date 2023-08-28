@@ -3,12 +3,17 @@ import { Box, Typography } from "@mui/material";
 import { shades } from "../../theme";
 import logo from "../../assets/viola-removebg-preview.png";
 import Image from "next/image";
+import styled from "styled-components"
 function Footer() {
   const {
     palette: { neutral },
   } = useTheme();
   return (
-    <Box marginTop="70px" padding="40px 0" backgroundColor={neutral.light}>
+    <Box marginTop="70px" padding="40px 0" 
+    // backgroundColor="red"
+    
+    backgroundColor={neutral.light}
+    >
       <Box
         width="80%"
         margin="auto"
@@ -18,23 +23,22 @@ function Footer() {
         rowGap="30px"
         columnGap="clamp(20px, 30px, 40px)"
       >
-        <Box width="clamp(20%, 30%, 40%)">
+        {/* <Box width="clamp(20%, 30%, 40%)"> */}
           <Box
             width="100px"
             height="80px"
             position="relative"
-            // backgroundColor="red"
             color={shades.secondary[500]}
             m="20px"
           >
             <Image src={logo} layout="fill" />
           </Box>
-          <div style={{ textAlign: "justify" }}>
+          {/* <StyledFootertext className="footerText" style={{ textAlign: "justify" }}>
             Join us on a journey of limitless possibilities. Experience the
             fusion of creativity and functionality as we redefine what's
             possible.
-          </div>
-        </Box>
+          </StyledFootertext> */}
+        {/* </Box> */}
 
         <Box>
           <Typography variant="h4" fontWeight="bold" mb="30px">
@@ -74,3 +78,16 @@ function Footer() {
 }
 
 export default Footer;
+
+
+const StyledFootertext = styled.div`
+background-color: red;
+text-align: justify;
+
+@media (min-width:320px) and (max-width:480px){
+
+
+
+}
+
+`

@@ -9,7 +9,7 @@ import styled from "styled-components";
 const HomeCatergories = () => {
   const cardData = [
     { title: "New Arrivals", img: imgOne, page: "newArrivals" },
-    { title: "Women", img: imgTwo, page: "women" },
+    { title: "Women", img: imgTwo, page:"women" },
     { title: "Men", img: imgThree, page: "men" },
     { title: "Girls", img: imgFour, page: "girls" },
     { title: "Boys", img: imgFive, page: "boys" },

@@ -24,18 +24,23 @@ const CartMenu = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
-
   const totalPrice = cart.reduce((total, item) => {
-    return total + item.count * item.attributes.price;
+    // return total + item.count * item.attributes.price;
+    return total + 4 * item.attributes.price;
+
   }, 0);
+
+  const router = useRouter()
+
+  console.log(isCartOpen, "@cart")
 
   return (
     <Box
-      display={isCartOpen ? "block" : "none"}
+      display={isCartOpen ? "flex" : "none"}
       backgroundColor="rgba(0, 0, 0, 0.4)"
-      position="fixed"
+      position="relative"
       zIndex={1000}
-      width="100%"
+      width="100vh"
       height="100%"
       left="0"
       top="0"
@@ -134,7 +139,7 @@ const CartMenu = () => {
                 m: "20px 0",
               }}
               onClick={() => {
-                navigate.push("/checkout");
+                router.push("/checkout");
                 dispatch(setIsCartOpen({}));
               }}
             >

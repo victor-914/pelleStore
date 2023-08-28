@@ -41,7 +41,7 @@ export const cartSlice = createSlice({
     },
 
     setIsCartOpen: (state) => {
-      console.log(state.isCartOpen, "state");
+      console.log(state, "state");
       state.isCartOpen = !state.isCartOpen;
     },
   },

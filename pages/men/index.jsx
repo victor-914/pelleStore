@@ -3,24 +3,26 @@ import CatergoriesHeader from "../../components/catergories/CatergoriesHeader";
 import mensWear from "../../assets/products-page-heading.jpg";
 import styled from "styled-components";
 import ProductCarousel from "../../components/productsCard/ProductCard";
+import api from "../../utils/api"
+import CartMenu from "../../scenes/global/CartMenu";
 
-function MensWears() {
+function MensWears(props) {
+   console.log(props,"props")
   return (
     <>
+      <CartMenu/>
       <CatergoriesHeader image={mensWear} text="Our latest Products" />
-
       <StyledMensWears>
         <main className="contentHolder">
-  
-
-  <ProductCarousel/>
-  <ProductCarousel/>
-  <ProductCarousel/>
-  <ProductCarousel/>
-  <ProductCarousel/>
-  <ProductCarousel/>
-
-
+          {
+            props.products.map((item) => (
+              <>
+             <ProductCarousel data={item} 
+               page={"men"}
+             />
+              </>
+            ))
+          }
         </main>
       </StyledMensWears>
     </>
@@ -49,3 +51,21 @@ padding-bottom: 100px;
     justify-content: space-around;
   }
 `;
+
+
+
+export async function getStaticProps() {
+  // Fetch product data from an API
+  const response = await  api("/products");
+  console.log(response.data)
+   const products = response?.data
+  
+
+  // Return product data as props
+  return {
+    props: {
+      products
+    }
+  };
+}
+

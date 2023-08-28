@@ -9,17 +9,21 @@ import {AiFillHeart} from "react-icons/ai"
 import {AiFillEye} from "react-icons/ai";
 import styled from "styled-components";
 import One from "../../assets/slider-01.jpg";
-import imagetwo from "../../assets/slider-02.jpg";
 import imagethree from "../../assets/slider-03.jpg";
 import imagefour from "../../assets/banner-02.jpg";
 import imagefive from "../../assets/banner-03.jpg";
 import Image from "next/image";
-const heroTextureImports = [One, imagetwo, imagethree, imagefour, imagefive];
+import { useRouter } from "next/router";
 
-const ProductCarousel = ({}) => {
+const heroTextureImports = [One,  imagethree, imagefour, imagefive];
+
+const ProductCarousel = ({data, page}) => {
+   const router = useRouter()
+  console.log(data, page, "page")
+  
   const isNonMobile = useMediaQuery("(min-width:600px)");
   return (
-    <StyledProductCarousel>
+    <StyledProductCarousel >
       <Carousel
         infiniteLoop={true}
         showThumbs={false}
@@ -59,12 +63,12 @@ const ProductCarousel = ({}) => {
           </IconButton>
         )}
       >
-        {heroTextureImports.map((texture, index) => (
+        {data.product_images.map((texture, index) => (
           <>
             <main className="imgCarouselCont" key={`carousel-image-${index}`}>
               <div className="overlay"></div>
               <Image
-                src={texture.src}
+                src={imagefour}
                 alt={`carousel-${index}`}
                 layout="fill"
                 className="img"
@@ -75,14 +79,11 @@ const ProductCarousel = ({}) => {
             <FaShoppingCart className="icon"/>
             </div>
 
-            <div className="iconCont">
+            <div className="iconCont"  onClick={() => router.push(`/${page}/${data.product_id}`)}>
             < AiFillEye className="icon"/>
             </div>
 
-            <div className="iconCont">
-                <AiFillHeart className="icon"/>
-            </div>
-            
+          
             </section>
 
             </main>

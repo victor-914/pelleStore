@@ -10,9 +10,18 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../../theme";
 import { addToCart } from "../../state";
 import { useDispatch } from "react-redux";
-import img from "../../assets/banner-02.jpg";
+import img from "../../assets/banner-02.jpg"; 
 import styled from "styled-components";
-const ItemDetails = () => {
+import Image from "next/image";
+import One from "../../assets/bannerPic1.jpeg";
+import imagetwo from "../../assets/bannerpic2.jpeg";
+import imagefour from "../../assets/taylor-dG4Eb_oC5iM-unsplash.jpeg";
+import imagefive from "../../assets/brian-lawson-jRztw-pVdyk-unsplash.jpeg";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+const ItemDetails = ({}) => {
   const dispatch = useDispatch();
   const { itemId } = useParams();
   const [value, setValue] = useState("description");
@@ -23,56 +32,82 @@ const ItemDetails = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const heroTextureImports = [One, imagetwo, imagefour,imagefive];
 
-  async function getItem() {
-    // const item = await fetch(
-    //   `http://localhost:2000/api/items/${itemId}?populate=image`,
-    //   {
-    //     method: "GET",
-    //   }
-    // );
-    // const itemJson = await item.json();
-    // setItem(itemJson.data);
-  }
-
-  // async function getItems() {
-  // const items = await fetch(
-  //   `http://localhost:2000/api/items?populate=image`,
-  //   {
-  //     method: "GET",
-  //   }
-  // );
-  // const itemsJson = await items.json();
-  // setItems(itemsJson.data);
-  // }
-
-  // useEffect(() => {
-  //   getItem();
-  //   getItems();
-  // }, [itemId]); // eslint-disable-line react-hooks/exhaustive-deps
+  
 
   return (
     <StyledItemsPage>
     <Box width="80%" m=" auto">
       <Box display="flex" flexWrap="wrap" columnGap="40px">
         {/* IMAGES */}
-        <Box flex="1 1 40%" mb="40px">
-          <img
+        <Box flex="1 1 40%" position="relative" mb="40px">
+          {/* <Image
             alt={item?.name}
-            width="100%"
-            height="100%"
             src={img}
-            // layout="f"
-            // style={{ objectFit: "contain" }}
+            layout="fill"
+          /> */}
+          <Carousel
+      infiniteLoop={true}
+      showThumbs={false}
+      showIndicators={false}
+      showStatus={false}
+      autoPlay={true}
+      renderArrowPrev={(onClickHandler, hasPrev, label) => (
+        <IconButton
+          onClick={onClickHandler}
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "0",
+            color: "white",
+            padding: "5px",
+            zIndex: "10",
+          }}
+        >
+          <NavigateBeforeIcon sx={{ fontSize: 40 }} />
+        </IconButton>
+      )}
+      renderArrowNext={(onClickHandler, hasNext, label) => (
+        <IconButton
+          onClick={onClickHandler}
+          sx={{
+            position: "absolute",
+            top: "50%",
+            right: "0",
+            color: "white",
+            padding: "5px",
+            zIndex: "10",
+          }}
+        >
+          <NavigateNextIcon sx={{ fontSize: 40 }} />
+        </IconButton>
+      )}
+    >
+      {heroTextureImports.map((texture, index) => (
+        <Box key={`carousel-image-${index}`}>
+          <img
+            src={texture.src}
+            alt={`carousel-${index}`}
+            style={{
+              width: "100%",
+              height: "700px",
+              objectFit: "cover",
+              // objectPosition: `${ isNonMobile ?    "5px 0%" : "-700px 0%"}`,
+              backgroundAttachment: "fixed",
+            }}
           />
+          {console.log(texture.src, "texture")}
+
+          
+        </Box>
+      ))}
+    </Carousel>
         </Box>
 
         {/* ACTIONS */}
         <Box flex="1 1 50%" mb="40px">
-          <Box display="flex" justifyContent="space-between">
-            <Box>Home/Item</Box>
-            <Box>Prev Next</Box>
-          </Box>
+          
 
           <Box m="65px 0 25px 0">
             <Typography variant="h3">
@@ -109,8 +144,8 @@ const ItemDetails = () => {
             </Box>
             <Button
               sx={{
-                backgroundColor: "#222222",
-                color: "white",
+                backgroundColor: "#000",
+                color: "#000",
                 borderRadius: 0,
                 minWidth: "150px",
                 padding: "10px 40px",
@@ -170,7 +205,7 @@ export default ItemDetails;
 
 
  const StyledItemsPage = styled.section`
-  padding-top:80px;
+  padding-top:140px;
 
 
 

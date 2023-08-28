@@ -10,8 +10,10 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../../theme";
 import { addToCart } from "../../state";
 import { useDispatch } from "react-redux";
-
-const ItemDetails = () => {
+import img from "../../assets/banner-03.jpg"
+import Image from "next/image"
+const ItemDetails = (props) => {
+  console.log(props)
   const dispatch = useDispatch();
   const { itemId } = useParams();
   const [value, setValue] = useState("description");
@@ -23,43 +25,17 @@ const ItemDetails = () => {
     setValue(newValue);
   };
 
-  async function getItem() {
-    const item = await fetch(
-      `http://localhost:2000/api/items/${itemId}?populate=image`,
-      {
-        method: "GET",
-      }
-    );
-    const itemJson = await item.json();
-    setItem(itemJson.data);
-  }
-
-  async function getItems() {
-    const items = await fetch(
-      `http://localhost:2000/api/items?populate=image`,
-      {
-        method: "GET",
-      }
-    );
-    const itemsJson = await items.json();
-    setItems(itemsJson.data);
-  }
-
-  useEffect(() => {
-    getItem();
-    getItems();
-  }, [itemId]); // eslint-disable-line react-hooks/exhaustive-deps
-
   return (
     <Box width="80%" m="80px auto">
       <Box display="flex" flexWrap="wrap" columnGap="40px">
         {/* IMAGES */}
         <Box flex="1 1 40%" mb="40px">
-          <img
-            alt={item?.name}
+          <Image
+            alt={"image"}
             width="100%"
             height="100%"
-            src={`http://localhost:2000${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
+            src={img}
+            layout="fixed"
             style={{ objectFit: "contain" }}
           />
         </Box>

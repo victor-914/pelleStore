@@ -8,14 +8,19 @@ import cartReducer from "../state/index";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { theme } from "../theme";
+import Footer from "../scenes/global/Footer"
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import "react-image-gallery/styles/css/image-gallery.css";
 import Navbar from "../scenes/global/Navbar";
+import CartMenu from "../scenes/global/CartMenu";
+import MobileMenu from "../components/mobileMenu/MobileMenu";
+import mobileReducers from "../state/mobilemenu"
 function MyApp({ Component, pageProps }) {
   const store = configureStore({
     reducer: {
       cart: cartReducer,
+      mMenu:mobileReducers
     },
   });
 
@@ -63,9 +68,12 @@ function MyApp({ Component, pageProps }) {
       </Helmet>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
+        <CssBaseline />
+        {/* <CartMenu/> */}
+        <MobileMenu/>
           <Navbar/>
-          <Component {...pageProps} />
+        <Component {...pageProps} />
+        <Footer/>
         </ThemeProvider>
       </Provider>
     </>

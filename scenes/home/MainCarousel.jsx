@@ -19,7 +19,7 @@ import imageseven from "../../assets/uji-kanggo-gumilang-sMn0sxR8v2E-unsplash.jp
 
 
 const MainCarousel = () => {
-  const heroTextureImports = [One, imagetwo, imagefour, imagefour,imagefive, imagesix, imageseven];
+  const heroTextureImports = [One, imagetwo, imagefour,imagefive, imagesix, imageseven];
   const isNonMobile = useMediaQuery("(min-width:600px)");
   return (
     <Carousel

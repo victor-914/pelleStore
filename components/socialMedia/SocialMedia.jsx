@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image"
 import social1 from "../../assets/slider-01.jpg"
-import social2 from "../../assets/strapi-images/brian-lawson-jRztw-pVdyk-unsplash.jpeg"
+import social2 from "../../assets/banner-02.jpg"
 import {AiFillInstagram} from "react-icons/ai"
 import styled from "styled-components"
 function SocialMedia() {
@@ -111,6 +111,38 @@ header{
    height: 100%;
    color: white;
 }
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+    header{
+      font-size: 20px;
+     
+    }
+
+    
+.socialContainer{
+  flex-direction: column;
+}
+
+.socials{
+ width: 100%;
+ height: 30vh;
+ position: relative;
+ cursor: pointer;
+margin-bottom: 10px;
+}
+
+
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+
+  }
 
 
 `;

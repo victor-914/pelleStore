@@ -78,6 +78,7 @@ margin: auto;
   width: 48%;
   position: relative;
   height: 100vh;
+  margin-bottom:20px;
 }
 
 .banner-content{
@@ -114,7 +115,7 @@ padding: 10px;
   flex-direction: column;
   position: relative;
    justify-content: space-between;
-
+  
 }
 
 
@@ -122,7 +123,6 @@ padding: 10px;
  width: 100%;
  height: 45%;
  position: relative;
- background-color: orange;
 }
 
 .shopNow{
@@ -138,6 +138,54 @@ padding: 10px;
   color: #fff;
   border: 3px solid #fff;
 }
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+   flex-direction: column;
+   width:98%;
+   margin: auto;
+   height: auto;
+
+   .heroBanner{
+    width: 100%;
+    height: 50vh;
+   }
+
+   .banner-content{
+     width:100%;
+   }
+
+   .entry-title{
+  font-size:20px;
+  font-weight: 600;
+  /* padding-bottom: 10px; */
+}
+
+   .entry-subtitle{
+
+   }
+
+   .asideBanner{
+width:100%;
+justify-content: space-around;
+   }
+
+
+   /* .aside{
+ width: 100%;
+ height: 45%;
+ position: relative;
+ background-color: orange;
+} */
+
+
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+  }
 
 
 

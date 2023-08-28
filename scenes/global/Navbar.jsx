@@ -13,13 +13,15 @@ import { useRouter } from "next/router";
 import logo from "../../assets/violaLogo.jpeg";
 import Image from "next/image";
 import styled from "styled-components";
+import { setIsmMenuOpen } from "../../state/mobilemenu";
+
 const StyledSecNavBar = styled.section`
   width: 100%;
   margin: auto;
   height: 100px;
   background-color:#901D78;
   position: fixed;
-  z-index: 10;
+  z-index: 1;
  
 
 
@@ -55,6 +57,10 @@ li{
     cursor: pointer;
   
   }
+
+  @media (min-width:320px) and (max-width:480px){
+    display: none;
+  }
 `;
 const secNavbar = [
   {
@@ -89,7 +95,6 @@ const secNavbar = [
   },
 ];
 function Navbar() {
-  const navigate = useRouter();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const router = useRouter()
@@ -99,7 +104,7 @@ function Navbar() {
         <main className="secBar">
           {
             secNavbar.map((item) => (
-              <li onClick={() => router.push(`/${item.link}`)}>{item.content}</li>
+              <li  key={item.id} onClick={() => router.push(`/${item.link}`)}>{item.content}</li>
             ))
           }
         </main>
@@ -109,7 +114,7 @@ function Navbar() {
         alignItems="center"
         width="100%"
         height="60px"
-        backgroundColor="rgba(255, 255, 255, 0.95)"
+        backgroundColor="rgba(255, 255, 255, 1)"
         color="black"
         position="fixed"
         top="0"
@@ -139,10 +144,8 @@ function Navbar() {
             columnGap="20px"
             zIndex="2"
           >
-            <IconButton sx={{ color: "black" }}>
-              <SearchOutlined />
-            </IconButton>
-            <IconButton sx={{ color: "black" }}>
+           
+            <IconButton sx={{ color: "black" } }  onClick={() => router.push("/profile")}>
               <PersonOutline />
             </IconButton>
             <Badge
@@ -166,7 +169,9 @@ function Navbar() {
                 <ShoppingBagOutlined />
               </IconButton>
             </Badge>
-            <IconButton sx={{ color: "black" }}>
+            <IconButton 
+             onClick={() => dispatch(setIsmMenuOpen({}))}
+            sx={{ color: "black" }}>
               <MenuOutlined />
             </IconButton>
           </Box>
