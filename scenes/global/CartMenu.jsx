@@ -20,20 +20,16 @@ const FlexBox = styled(Box)`
 `;
 
 const CartMenu = () => {
-  const navigate = useRouter();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
   const totalPrice = cart.reduce((total, item) => {
     // return total + item.count * item.attributes.price;
-    return total + 4 * item.attributes.price;
-
+    return 5 + 4 * 6;
   }, 0);
 
   const router = useRouter()
-
-  console.log(isCartOpen, "@cart")
-
+console.log(cart,"cart")
   return (
     <Box
       display={isCartOpen ? "flex" : "none"}
@@ -79,7 +75,7 @@ const CartMenu = () => {
                   <Box flex="1 1 60%">
                     <FlexBox mb="5px">
                       <Typography fontWeight="bold">
-                        {item.attributes.name}
+                        {/* {item.attributes.name} */}
                       </Typography>
                       <IconButton
                         onClick={() =>
@@ -89,7 +85,7 @@ const CartMenu = () => {
                         <CloseIcon />
                       </IconButton>
                     </FlexBox>
-                    <Typography>{item.attributes.shortDescription}</Typography>
+                    {/* <Typography>{item.attributes.shortDescription}</Typography> */}
                     <FlexBox m="15px 0">
                       <Box
                         display="flex"
@@ -113,7 +109,7 @@ const CartMenu = () => {
                         </IconButton>
                       </Box>
                       <Typography fontWeight="bold">
-                        ${item.attributes.price}
+                        {/* ${item.attributes.price} */}
                       </Typography>
                     </FlexBox>
                   </Box>

@@ -1,37 +1,37 @@
 import React from "react";
 import CatergoriesHeader from "../../components/catergories/CatergoriesHeader";
-import mensWear from "../../assets/products-page-heading.jpg";
+import WomenWear from "../../assets/products-page-heading.jpg";
 import styled from "styled-components";
 import ProductCarousel from "../../components/productsCard/ProductCard";
 import api from "../../utils/api"
 import CartMenu from "../../scenes/global/CartMenu";
 
-function MensWears(props) {
-  //  console.log(props,"props")
+function WomenWears(props) {
+//    console.log(props,"props")
   return (
     <>
       <CartMenu/>
-      <CatergoriesHeader image={mensWear} text="Our latest Products" />
-      <StyledMensWears>
+      <CatergoriesHeader image={WomenWear} text="Our latest Products" />
+      <StyledWomenWears>
         <main className="contentHolder">
           {
-            props?.products?.map((item) => (
+            props.products.map((item) => (
               <>
              <ProductCarousel data={item} 
-               page={"men"}
+               page={"women"}
              />
               </>
             ))
           }
         </main>
-      </StyledMensWears>
+      </StyledWomenWears>
     </>
   );
 }
 
-export default MensWears;
+export default WomenWears;
 
-const StyledMensWears = styled.section`
+const StyledWomenWears = styled.section`
   width: 100%;
   height: auto;
 padding-bottom: 100px;
@@ -56,9 +56,9 @@ padding-bottom: 100px;
 
 export async function getStaticProps() {
   // Fetch product data from an API
-  const response = await  api("/products?populate=*");
-   const products = response?.data?.data
-
+  const response = await  api("/products");
+   const products = response?.data
+  
 
   // Return product data as props
   return {

@@ -1,29 +1,25 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import Item from "../../components/Item";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../../theme";
 import { addToCart } from "../../state";
-import { useDispatch } from "react-redux";
-import img from "../../assets/banner-02.jpg"; 
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Image from "next/image";
-import One from "../../assets/bannerPic1.jpeg";
-import imagetwo from "../../assets/bannerpic2.jpeg";
-import imagefour from "../../assets/taylor-dG4Eb_oC5iM-unsplash.jpeg";
-import imagefive from "../../assets/brian-lawson-jRztw-pVdyk-unsplash.jpeg";
+
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-const ItemDetails = ({}) => {
+const ItemDetails = ({data}) => {
+
+  console.log(data, "data@itemdetail")
   const dispatch = useDispatch();
-  const { itemId } = useParams();
+  const cart = useSelector((state) => state.cart.cart)
   const [value, setValue] = useState("description");
   const [count, setCount] = useState(1);
   const [item, setItem] = useState(null);
@@ -32,9 +28,9 @@ const ItemDetails = ({}) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const heroTextureImports = [One, imagetwo, imagefour,imagefive];
 
   
+  console.log(cart,"@cart")
 
   return (
     <StyledItemsPage>
@@ -42,11 +38,6 @@ const ItemDetails = ({}) => {
       <Box display="flex" flexWrap="wrap" columnGap="40px">
         {/* IMAGES */}
         <Box flex="1 1 40%" position="relative" mb="40px">
-          {/* <Image
-            alt={item?.name}
-            src={img}
-            layout="fill"
-          /> */}
           <Carousel
       infiniteLoop={true}
       showThumbs={false}
@@ -84,20 +75,19 @@ const ItemDetails = ({}) => {
         </IconButton>
       )}
     >
-      {heroTextureImports.map((texture, index) => (
+      {data?.attributes?.product_images?.data?.map((texture, index) => (
         <Box key={`carousel-image-${index}`}>
-          <img
-            src={texture.src}
+          <Image
+            src={texture?.attributes?.url}
             alt={`carousel-${index}`}
-            style={{
-              width: "100%",
-              height: "700px",
-              objectFit: "cover",
-              // objectPosition: `${ isNonMobile ?    "5px 0%" : "-700px 0%"}`,
-              backgroundAttachment: "fixed",
-            }}
+              width="100%"
+              height="700px"
+              layout="fixed"
+              objectFit="cover"
+              backgroundAttachment="fixed"
+          
           />
-          {console.log(texture.src, "texture")}
+          {console.log(texture?.attributes?.url, "texture")}
 
           
         </Box>
@@ -116,13 +106,8 @@ const ItemDetails = ({}) => {
             </Typography>
             <Typography>${item?.attributes?.price}</Typography>
             <Typography sx={{ mt: "20px" }}>
-              {/* {item?.attributes?.longDescription} */}
-              Who is EdRoh? I'm a lead engineer for a publicly traded company
-              and have been developing for a decade now. I'm here to provide you
-              in-depth tutorials by simplifying difficult concepts and more
-              importantly, getting your hands dirty by building production level
-              projects with ease to impress your future/current employer or
-              clients
+              {/* {item?.attributes?.product_descriptions} */}
+            jsjsjjs
             </Typography>
           </Box>
 
@@ -150,7 +135,7 @@ const ItemDetails = ({}) => {
                 minWidth: "150px",
                 padding: "10px 40px",
               }}
-              onClick={() => dispatch(addToCart({ item: { ...item, count } }))}
+              onClick={() => dispatch(addToCart({ item: { ...data, count } }))}
             >
               ADD TO CART
             </Button>

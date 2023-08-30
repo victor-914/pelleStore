@@ -19,7 +19,7 @@ const heroTextureImports = [One,  imagethree, imagefour, imagefive];
 
 const ProductCarousel = ({data, page}) => {
    const router = useRouter()
-  console.log(data, page, "page")
+  console.log(data, "page")
   
   const isNonMobile = useMediaQuery("(min-width:600px)");
   return (
@@ -63,23 +63,24 @@ const ProductCarousel = ({data, page}) => {
           </IconButton>
         )}
       >
-        {data.product_images.map((texture, index) => (
+        {data?.attributes.product_images?.data.map((texture, index) => (
           <>
             <main className="imgCarouselCont" key={`carousel-image-${index}`}>
               <div className="overlay"></div>
               <Image
-                src={imagefour}
+                src={texture?.attributes?.url}
                 alt={`carousel-${index}`}
                 layout="fill"
                 className="img"
               />
+              {console.log(texture,"djdj")}
             <section className="accesoriesCont">
             
             <div className="iconCont">
             <FaShoppingCart className="icon"/>
             </div>
 
-            <div className="iconCont"  onClick={() => router.push(`/${page}/${data.product_id}`)}>
+            <div className="iconCont"  onClick={() => router.push(`/${page}/${data.id}`)}>
             < AiFillEye className="icon"/>
             </div>
 

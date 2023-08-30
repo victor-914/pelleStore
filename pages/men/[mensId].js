@@ -4,11 +4,11 @@ import api from "../../utils/api"
 import CartMenu from '../../scenes/global/CartMenu'
 
 
-function PerMensWear() {
+function PerMensWear({products}) {
   return (
     <div>
       <CartMenu/>
-        <ItemDetails/>   
+        <ItemDetails data={products}/>   
     </div>
   )
   
@@ -17,12 +17,11 @@ function PerMensWear() {
 export  default PerMensWear
 
 
-export async function getStaticProps() {
+export async function getStaticProps({params}) {
 
 
-  const products = []
-
-  
+  const response = await  api(`/products/${params.mensId.toString()}/?populate=*`);
+  const products = response?.data?.data
 
   // Return product data as props
   return {
@@ -35,10 +34,12 @@ export async function getStaticProps() {
 export async function getStaticPaths() {
 
   const response = await  api("/products");
-   const products = response?.data
-  const paths = products.map(item => ({
-    params: { mensId: item.product_id.toString() }
+   const products = response?.data?.data
+  const paths = products?.map(item => ({
+    params: { mensId: item.id.toString() }
   }));
+
+ 
 
   return { paths, fallback: false };
 }

@@ -61,7 +61,6 @@ const MenuItem = styled.div`
 
 function MobileMenu() {
     const dispatch = useDispatch()
-
     const isMobileMenu = useSelector((state) => state.mMenu.isMobileMenuOpen)
     console.log(isMobileMenu)
   return (
