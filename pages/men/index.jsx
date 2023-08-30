@@ -57,7 +57,6 @@ padding-bottom: 100px;
 export async function getStaticProps() {
   // Fetch product data from an API
   const response = await  api("/products");
-  console.log(response.data)
    const products = response?.data
   
 

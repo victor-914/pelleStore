@@ -18,10 +18,7 @@ export  default PerMensWear
 
 
 export async function getStaticProps() {
-  // Fetch product data from an API
-  // const response = await  api("/products");
-  // console.log(response.data)
-  //  const products = response?.data
+
 
   const products = []
 
@@ -38,7 +35,6 @@ export async function getStaticProps() {
 export async function getStaticPaths() {
 
   const response = await  api("/products");
-  console.log(response.data)
    const products = response?.data
   const paths = products.map(item => ({
     params: { mensId: item.product_id.toString() }
