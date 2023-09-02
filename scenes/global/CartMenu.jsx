@@ -24,12 +24,10 @@ const CartMenu = () => {
   const cart = useSelector((state) => state.cart.cart);
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
   const totalPrice = cart.reduce((total, item) => {
-    // return total + item.count * item.attributes.price;
-    return 5 + 4 * 6;
+    return total + item.count * item.attributes.product_discount_price;
   }, 0);
 
   const router = useRouter()
-console.log(cart,"cart")
   return (
     <Box
       display={isCartOpen ? "flex" : "none"}
@@ -62,14 +60,14 @@ console.log(cart,"cart")
           {/* CART LIST */}
           <Box>
             {cart.map((item) => (
-              <Box key={`${item.attributes.name}-${item.id}`}>
+              <Box key={`${item?.attributes?.product_name}-${item.id}`}>
                 <FlexBox p="15px 0">
                   <Box flex="1 1 40%">
                     <img
-                      alt={item?.name}
+                      alt={item?.product_name}
                       width="123px"
                       height="164px"
-                      src={`http://localhost:2000${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
+                      src={`${item?.attributes?.product_images?.data[0]?.attributes?.url}`}
                     />
                   </Box>
                   <Box flex="1 1 60%">
@@ -109,7 +107,7 @@ console.log(cart,"cart")
                         </IconButton>
                       </Box>
                       <Typography fontWeight="bold">
-                        {/* ${item.attributes.price} */}
+                        ₦{item?.attributes?.product_discount_price}
                       </Typography>
                     </FlexBox>
                   </Box>
@@ -123,7 +121,7 @@ console.log(cart,"cart")
           <Box m="20px 0">
             <FlexBox m="20px 0">
               <Typography fontWeight="bold">SUBTOTAL</Typography>
-              <Typography fontWeight="bold">${totalPrice}</Typography>
+              <Typography fontWeight="bold">₦ {totalPrice}</Typography>
             </FlexBox>
             <Button
               sx={{
@@ -135,7 +133,7 @@ console.log(cart,"cart")
                 m: "20px 0",
               }}
               onClick={() => {
-                router.push("/checkout");
+                router.push("/_checkout");
                 dispatch(setIsCartOpen({}));
               }}
             >

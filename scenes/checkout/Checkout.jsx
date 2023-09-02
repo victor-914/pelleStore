@@ -7,6 +7,24 @@ import { shades } from "../../theme";
 import Payment from "./Payment";
 import Shipping from "./Shipping";
 import { loadStripe } from "@stripe/stripe-js";
+import styled from "styled-components";
+
+  const StyledButton = styled.button`
+    width:100%;
+
+    height:40px;
+    background-color: #000;
+    color: #fff;
+    
+
+    /* :hover{
+      background-color: #fff;
+    color: #000;
+    } */
+
+
+
+  `
 
 const stripePromise = loadStripe(
   "pk_test_51LgU7yConHioZHhlAcZdfDAnV9643a7N1CMpxlKtzI1AUWLsRyrord79GYzZQ6m8RzVnVQaHsgbvN1qSpiDegoPi006QkO0Mlc"
@@ -21,7 +39,6 @@ const Checkout = () => {
   const handleFormSubmit = async (values, actions) => {
     setActiveStep(activeStep + 1);
 
-    // this copies the billing address onto shipping address
     if (isFirstStep && values.shippingAddress.isSameAddress) {
       actions.setFieldValue("shippingAddress", {
         ...values.billingAddress,
@@ -47,15 +64,15 @@ const Checkout = () => {
       })),
     };
 
-    const response = await fetch("http://localhost:2000/api/orders", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody),
-    });
-    const session = await response.json();
-    await stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
+    // const response = await fetch("http://localhost:2000/api/orders", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(requestBody),
+    // });
+    // const session = await response.json();
+    // await stripe.redirectToCheckout({
+    //   sessionId: session.id,
+    // });
   }
 
   return (
@@ -106,12 +123,14 @@ const Checkout = () => {
               )}
               <Box display="flex" justifyContent="space-between" gap="50px">
                 {!isFirstStep && (
-                  <Button
+                  <StyledButton
                     fullWidth
                     color="primary"
-                    variant="contained"
+                  variant="contained"
+                  
+                    // backgroundColor="red"
                     sx={{
-                      backgroundColor: shades.primary[200],
+                      backgroundColor: "red",
                       boxShadow: "none",
                       color: "white",
                       borderRadius: 0,
@@ -120,23 +139,14 @@ const Checkout = () => {
                     onClick={() => setActiveStep(activeStep - 1)}
                   >
                     Back
-                  </Button>
+                  </StyledButton>
                 )}
-                <Button
+                <StyledButton
                   fullWidth
                   type="submit"
-                  color="primary"
-                  variant="contained"
-                  sx={{
-                    backgroundColor: shades.primary[400],
-                    boxShadow: "none",
-                    color: "white",
-                    borderRadius: 0,
-                    padding: "15px 40px",
-                  }}
                 >
                   {!isSecondStep ? "Next" : "Place Order"}
-                </Button>
+                </StyledButton>
               </Box>
             </form>
           )}

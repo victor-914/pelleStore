@@ -3,26 +3,20 @@ import Head from "next/head";
 import { Helmet } from "react-helmet";
 import React from "react";
 import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import cartReducer from "../state/index";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { theme } from "../theme";
-import Footer from "../scenes/global/Footer"
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-image-gallery/styles/css/image-gallery.css";
-import Navbar from "../scenes/global/Navbar";
-import CartMenu from "../scenes/global/CartMenu";
-import MobileMenu from "../components/mobileMenu/MobileMenu";
-import mobileReducers from "../state/mobilemenu"
+import Layout from "../layouts/Layout";
+import store, { persistor } from "../state/store";
+import 'react-toastify/dist/ReactToastify.css';
+
+import { PersistGate } from "redux-persist/integration/react";
+import { ToastContainer } from "react-toastify";
 function MyApp({ Component, pageProps }) {
-  const store = configureStore({
-    reducer: {
-      cart: cartReducer,
-      mMenu:mobileReducers
-    },
-  });
+ 
 
   const getLayout = Component.getLayout || ((page) => page);
   return getLayout(
@@ -56,9 +50,12 @@ function MyApp({ Component, pageProps }) {
           href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap" rel="stylesheet"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <Helmet>
         <meta charSet="utf-8" />
@@ -68,12 +65,13 @@ function MyApp({ Component, pageProps }) {
       </Helmet>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {/* <CartMenu/> */}
-        <MobileMenu/>
-          <Navbar/>
-        <Component {...pageProps} />
-        <Footer/>
+          <Layout>
+            <ToastContainer/>
+            <CssBaseline />
+            <PersistGate loading={null} persistor={persistor}>
+              <Component {...pageProps} />
+            </PersistGate>
+          </Layout>
         </ThemeProvider>
       </Provider>
     </>

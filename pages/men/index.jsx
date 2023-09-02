@@ -4,13 +4,10 @@ import mensWear from "../../assets/products-page-heading.jpg";
 import styled from "styled-components";
 import ProductCarousel from "../../components/productsCard/ProductCard";
 import api from "../../utils/api"
-import CartMenu from "../../scenes/global/CartMenu";
 
 function MensWears(props) {
-  //  console.log(props,"props")
   return (
     <>
-      <CartMenu/>
       <CatergoriesHeader image={mensWear} text="Our latest Products" />
       <StyledMensWears>
         <main className="contentHolder">
@@ -35,11 +32,8 @@ const StyledMensWears = styled.section`
   width: 100%;
   height: auto;
 padding-bottom: 100px;
-
-  /* padding-top: 20px; */
   position: relative;
   .contentHolder {
-    /* background-color: red; */
     width: 80%;
     padding-top: 30px;
     margin: auto;
@@ -49,6 +43,10 @@ padding-bottom: 100px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+  }
+
+  @media (min-width: 360px) and (max-width:"481px") {
+    
   }
 `;
 

@@ -3,11 +3,6 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { shades } from "../../theme";
-// import One from "../../assets/image.jpeg";
-// import imagetwo from "../../assets/image2.jpeg";
-// import imagethree from "../../assets/image3.jpeg";
-// import imagefour from "../../assets/image4.jpeg";
 
 import One from "../../assets/bannerPic1.jpeg";
 import imagetwo from "../../assets/bannerpic2.jpeg";
@@ -27,6 +22,7 @@ const MainCarousel = () => {
       showThumbs={false}
       showIndicators={false}
       showStatus={false}
+      swipeable={false}
       autoPlay={true}
       renderArrowPrev={(onClickHandler, hasPrev, label) => (
         <IconButton

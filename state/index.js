@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { saveCartToLocalStorage } from "./localStorage";
 
 const initialState = {
   isCartOpen: false,
@@ -15,6 +16,7 @@ export const cartSlice = createSlice({
     },
 
     addToCart: (state, action) => {
+       console.log(action.payload,"catrtitself")
       state.cart = [...state.cart, action.payload.item];
     },
 

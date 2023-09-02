@@ -17,7 +17,6 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 const ItemDetails = ({data}) => {
 
-  console.log(data, "data@itemdetail")
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart)
   const [value, setValue] = useState("description");
@@ -30,7 +29,7 @@ const ItemDetails = ({data}) => {
   };
 
   
-  console.log(cart,"@cart")
+  // console.log(cart,"@cart")
 
   return (
     <StyledItemsPage>
@@ -42,6 +41,7 @@ const ItemDetails = ({data}) => {
       infiniteLoop={true}
       showThumbs={false}
       showIndicators={false}
+ swipeable={false}
       showStatus={false}
       autoPlay={true}
       renderArrowPrev={(onClickHandler, hasPrev, label) => (
@@ -77,19 +77,16 @@ const ItemDetails = ({data}) => {
     >
       {data?.attributes?.product_images?.data?.map((texture, index) => (
         <Box key={`carousel-image-${index}`}>
-          <Image
+          <img
             src={texture?.attributes?.url}
             alt={`carousel-${index}`}
               width="100%"
-              height="700px"
-              layout="fixed"
-              objectFit="cover"
-              backgroundAttachment="fixed"
+              height="60vh"
+              layout="fill"
+              // objectFit="cover"
+              // backgroundAttachment="fixed"
           
           />
-          {console.log(texture?.attributes?.url, "texture")}
-
-          
         </Box>
       ))}
     </Carousel>
@@ -101,13 +98,28 @@ const ItemDetails = ({data}) => {
 
           <Box m="65px 0 25px 0">
             <Typography variant="h3">
-              {/* {item?.attributes?.name} */}
-              opportunities 
+            TITLE:  {data?.attributes?.product_name}
             </Typography>
-            <Typography>${item?.attributes?.price}</Typography>
+            <Typography> OLD PRICE: ${data?.attributes?.product_price}</Typography>
+            <Typography> NEW PRICE${data?.attributes?.product_discount_price}</Typography>
+
             <Typography sx={{ mt: "20px" }}>
-              {/* {item?.attributes?.product_descriptions} */}
-            jsjsjjs
+               {data?.attributes?.product_description}
+        
+            </Typography>
+            <Typography sx={{ mt: "5px" }}>
+              CATERGORY: {data?.attributes?.product_catergory}
+        
+            </Typography>
+            <Typography sx={{ mt: "5px" }}>
+              MATERIAL: {data?.attributes?.product_material}
+        
+            </Typography>
+            <Typography sx={{ mt: "5px" }}>
+              SIZE:  {data?.attributes?.product_size}
+            </Typography>
+            <Typography sx={{ mt: "5px" }}>
+              COLOR:  {data?.attributes?.product_color}
             </Typography>
           </Box>
 
@@ -142,10 +154,10 @@ const ItemDetails = ({data}) => {
           </Box>
           <Box>
             <Box m="20px 0 5px 0" display="flex">
-              <FavoriteBorderOutlinedIcon />
-              <Typography sx={{ ml: "5px" }}>ADD TO WISHLIST</Typography>
+              {/* <FavoriteBorderOutlinedIcon /> */}
+              {/* <Typography sx={{ ml: "5px" }}>ADD TO WISHLIST</Typography> */}
             </Box>
-            <Typography>CATEGORIES: {item?.attributes?.category}</Typography>
+            {/* <Typography>CATEGORIES: {item?.attributes?.category}</Typography> */}
           </Box>
         </Box>
       </Box>

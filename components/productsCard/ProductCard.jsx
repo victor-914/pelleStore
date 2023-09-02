@@ -4,30 +4,28 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { shades } from "../../theme";
-import { FaShoppingCart} from "react-icons/fa";
-import {AiFillHeart} from "react-icons/ai"
-import {AiFillEye} from "react-icons/ai";
+import { FaShoppingCart } from "react-icons/fa";
+import { AiFillHeart } from "react-icons/ai";
+import { AiFillEye } from "react-icons/ai";
 import styled from "styled-components";
-import One from "../../assets/slider-01.jpg";
-import imagethree from "../../assets/slider-03.jpg";
-import imagefour from "../../assets/banner-02.jpg";
-import imagefive from "../../assets/banner-03.jpg";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../state";
 
-const heroTextureImports = [One,  imagethree, imagefour, imagefive];
-
-const ProductCarousel = ({data, page}) => {
-   const router = useRouter()
-  console.log(data, "page")
-  
+const ProductCarousel = ({ data, page }) => {
+  const count = 1
+  const router = useRouter();
+  //  const cart   = useSelector((state) => state.cart.cart)
+  const dispatch = useDispatch();
   const isNonMobile = useMediaQuery("(min-width:600px)");
   return (
-    <StyledProductCarousel >
+    <StyledProductCarousel>
       <Carousel
         infiniteLoop={true}
         showThumbs={false}
-        showIndicators={false}
+        showIndicators={true}
         showStatus={false}
         autoPlay={false}
         swipeable={false}
@@ -63,7 +61,7 @@ const ProductCarousel = ({data, page}) => {
           </IconButton>
         )}
       >
-        {data?.attributes.product_images?.data.map((texture, index) => (
+        {data?.attributes?.product_images?.data?.map((texture, index) => (
           <>
             <main className="imgCarouselCont" key={`carousel-image-${index}`}>
               <div className="overlay"></div>
@@ -73,20 +71,54 @@ const ProductCarousel = ({data, page}) => {
                 layout="fill"
                 className="img"
               />
-              {console.log(texture,"djdj")}
-            <section className="accesoriesCont">
-            
-            <div className="iconCont">
-            <FaShoppingCart className="icon"/>
-            </div>
+              {console.log(texture, "djdj")}
+              <section className="accesoriesCont">
+                <div
+                  className="iconCont"
+                  onClick={() => {
+                    toast("Product Added to Cart", {
+                      hideProgressBar: true,
+                      autoClose: 1000,
+                      type: "success",
+                    }),
+                      console.log(texture, "data"),
+                      console.log(data, "dathdhhdhda");
+                    dispatch(addToCart({  item: {...data, count}} ));
+                  }}
+                  title="Add to cart"
+                >
+                  <FaShoppingCart className="icon" />
+                </div>
 
-            <div className="iconCont"  onClick={() => router.push(`/${page}/${data.id}`)}>
-            < AiFillEye className="icon"/>
-            </div>
+                <div
+                  className="iconCont"
+                  onClick={() => {
+                    router.push(`/${page}/${data.id}`),
+                      toast("Navigating to Product Page", {
+                        hideProgressBar: true,
+                        autoClose: 1000,
+                        type: "success",
+                      });
+                  }}
+                  title="View product"
+                >
+                  <AiFillEye className="icon" />
+                </div>
 
-          
-            </section>
-
+                <div
+                  className="iconCont"
+                  onClick={() => {
+                    toast(" Added to Wishlist", {
+                      hideProgressBar: true,
+                      autoClose: 2000,
+                      type: "success",
+                    });
+                  }}
+                  title="Add to wishlist"
+                >
+                  <AiFillHeart className="icon" />
+                </div>
+              </section>
             </main>
           </>
         ))}
@@ -103,14 +135,10 @@ const StyledProductCarousel = styled.section`
   position: relative;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
- 
 
-
-
-.img{
-  border-radius: 5px;
-
-}
+  .img {
+    border-radius: 5px;
+  }
 
   .imgCarouselCont {
     width: 100%;
@@ -118,7 +146,7 @@ const StyledProductCarousel = styled.section`
     position: relative;
   }
 
-  .accesoriesCont{
+  .accesoriesCont {
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -129,30 +157,28 @@ const StyledProductCarousel = styled.section`
     align-items: flex-end;
     padding-bottom: 20px;
     visibility: hidden;
-
   }
 
-  .iconCont{
-   padding: 8px;
-   border-radius: 5px;
-   background-color: #00000091;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-   cursor: pointer;
+  .iconCont {
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #00000091;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
 
-   z-index: 1000;
-
+    z-index: 1000;
   }
 
-  .iconCont:hover{
-    background-color: #901D78;
+  .iconCont:hover {
+    background-color: #901d78;
   }
 
-  .icon{
-     font-size: 20px;
-     color: #fff;
-}
+  .icon {
+    font-size: 20px;
+    color: #fff;
+  }
 
-  :hover .accesoriesCont{
+  :hover .accesoriesCont {
     visibility: visible;
   }
 `;

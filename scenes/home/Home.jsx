@@ -9,7 +9,6 @@ import CartMenu from "../global/CartMenu";
 function Home() {
   return (
     <div className="home">
-      <CartMenu/>
       <MainCarousel />
       <HomeCatergories/>
       <HomePageBanner/>
