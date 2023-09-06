@@ -15,6 +15,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from "react-toastify";
+import { hydrateRoot } from "react-dom";
+
+
+
+
 function MyApp({ Component, pageProps }) {
  
 
@@ -63,13 +68,13 @@ function MyApp({ Component, pageProps }) {
         <link rel="canonical" href="http://mysite.com/example" />
         <meta name="description" content="En" />
       </Helmet>
-      <Provider store={store}>
+      <Provider store={store} >
         <ThemeProvider theme={theme}>
           <Layout>
             <ToastContainer/>
             <CssBaseline />
             <PersistGate loading={null} persistor={persistor}>
-              <Component {...pageProps} />
+              <Component {...pageProps}  />
             </PersistGate>
           </Layout>
         </ThemeProvider>
@@ -79,3 +84,5 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+
+

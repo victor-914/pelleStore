@@ -6,7 +6,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ["res.cloudinary.com","https://picsum.photos","https://istockphoto.com"],
+    domains: ["res.cloudinary.com","https://picsum.photos","https://istockphoto.com","www.instagram.com"],
   },
   future: { webpack5: true },
   // swcMinify: true,

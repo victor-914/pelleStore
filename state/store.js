@@ -1,34 +1,32 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import mobileReducers from "../state/mobilemenu";
-import storage from 'redux-persist/lib/storage';
-import { persistReducer } from 'redux-persist';
-import thunk from 'redux-thunk';
-import { persistStore } from 'redux-persist';
-import cartReducer from "./index"
-
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
+import thunk from "redux-thunk";
+import { persistStore } from "redux-persist";
+import cartReducer from "./index";
+import wishListReducer from "./wishlist";
 
 const reducers = combineReducers({
-    cart: cartReducer,
-    mMenu: mobileReducers,
+  cart: cartReducer,
+  mMenu: mobileReducers,
+  wishList: wishListReducer,
 });
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
-  whitelist: ["cart"], 
+  whitelist: ["cart"],
 };
-
-
-
 
 const persistedCartReducer = persistReducer(persistConfig, reducers);
 
 const store = configureStore({
   reducer: persistedCartReducer,
-//   devTools: process.env.NODE_ENV !== 'production',
+  //   devTools: process.env.NODE_ENV !== 'production',
   middleware: [thunk],
 });
 
-export const  persistor = persistStore(store)
+export const persistor = persistStore(store);
 
 export default store;

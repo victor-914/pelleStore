@@ -13,9 +13,10 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../state";
+import { addToWishList } from "../../state/wishlist";
 
 const ProductCarousel = ({ data, page }) => {
-  const count = 1
+  const count = 1;
   const router = useRouter();
   //  const cart   = useSelector((state) => state.cart.cart)
   const dispatch = useDispatch();
@@ -81,9 +82,7 @@ const ProductCarousel = ({ data, page }) => {
                       autoClose: 1000,
                       type: "success",
                     }),
-                      console.log(texture, "data"),
-                      console.log(data, "dathdhhdhda");
-                    dispatch(addToCart({  item: {...data, count}} ));
+                      dispatch(addToCart({ item: { ...data, count } }));
                   }}
                   title="Add to cart"
                 >
@@ -112,7 +111,8 @@ const ProductCarousel = ({ data, page }) => {
                       hideProgressBar: true,
                       autoClose: 2000,
                       type: "success",
-                    });
+                    }),
+                      dispatch(addToWishList({ item: { ...data, count } }));
                   }}
                   title="Add to wishlist"
                 >

@@ -14,51 +14,49 @@ import logo from "../../assets/violaLogo.jpeg";
 import Image from "next/image";
 import styled from "styled-components";
 import { setIsmMenuOpen } from "../../state/mobilemenu";
+import { AiOutlineHeart } from "react-icons/ai";
+import { setIsWishListOpen } from "../../state/wishlist";
 
 const StyledSecNavBar = styled.section`
   width: 100%;
   margin: auto;
   height: 100px;
-  background-color:#901D78;
+  background-color: #901d78;
   position: fixed;
   z-index: 1;
- 
 
-
-.secBar{
-  display: flex;
-  flex-direction:row;
-  align-items:flex-end;
-  justify-content: space-around;
-  width: 100%;
-  height: 100%;
-  /* position: fixed; */
-  /* background-color: red; */
-}
-
-li{
-  font-size: 17px;
-  font-weight: 600;
-  list-style: none;
-  color: #fff;
-  letter-spacing: 1.3px;
-  text-transform: uppercase;
-  /* padding: 10px; */
-  width: 15%;
-  text-align: center;
-  border: 10px solid transparent;
-
-}
-
-  li:hover{
-    background-color: #fff;
-    border: 10px solid #901D78;
-    color: #000; 
-    cursor: pointer;
-  
+  .secBar {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+    /* position: fixed; */
+    /* background-color: red; */
   }
 
-  @media (min-width:320px) and (max-width:480px){
+  li {
+    font-size: 17px;
+    font-weight: 600;
+    list-style: none;
+    color: #fff;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    /* padding: 10px; */
+    width: 15%;
+    text-align: center;
+    border: 10px solid transparent;
+  }
+
+  li:hover {
+    background-color: #fff;
+    border: 10px solid #901d78;
+    color: #000;
+    cursor: pointer;
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
     display: none;
   }
 `;
@@ -97,16 +95,17 @@ const secNavbar = [
 function Navbar() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
-  const router = useRouter()
+  const wishList = useSelector((state) => state.wishList.wishList);
+  const router = useRouter();
   return (
     <>
       <StyledSecNavBar className="">
         <main className="secBar">
-          {
-            secNavbar.map((item) => (
-              <li  key={item.id} onClick={() => router.push(`/${item.link}`)}>{item.content}</li>
-            ))
-          }
+          {secNavbar.map((item) => (
+            <li key={item._id} onClick={() => router.push(`${item.link}`)}>
+              {item.content}
+            </li>
+          ))}
         </main>
       </StyledSecNavBar>
       <Box
@@ -138,14 +137,39 @@ function Navbar() {
           >
             <Image src={logo} layout="fill" />
           </Box>
+
           <Box
             display="flex"
             justifyContent="space-between"
             columnGap="20px"
             zIndex="2"
           >
-           
-            <IconButton sx={{ color: "black" } }  onClick={() => router.push("/profile")}>
+            <Badge
+              badgeContent={wishList.length}
+              color="secondary"
+              invisible={wishList.length === 0}
+              sx={{
+                "& .MuiBadge-badge": {
+                  right: 5,
+                  top: 5,
+                  padding: "0 4px",
+                  height: "14px",
+                  minWidth: "13px",
+                },
+              }}
+            >
+              <IconButton
+                onClick={() => dispatch(setIsWishListOpen({}))}
+                sx={{ color: "black" }}
+              >
+                <AiOutlineHeart />
+              </IconButton>
+            </Badge>
+
+            <IconButton
+              sx={{ color: "black" }}
+              onClick={() => router.push("/profile")}
+            >
               <PersonOutline />
             </IconButton>
             <Badge
@@ -169,9 +193,10 @@ function Navbar() {
                 <ShoppingBagOutlined />
               </IconButton>
             </Badge>
-            <IconButton 
-             onClick={() => dispatch(setIsmMenuOpen({}))}
-            sx={{ color: "black" }}>
+            <IconButton
+              onClick={() => dispatch(setIsmMenuOpen({}))}
+              sx={{ color: "black" }}
+            >
               <MenuOutlined />
             </IconButton>
           </Box>

@@ -1,17 +1,13 @@
-persist redux store to localstorage for cart === done 
-persist redux store to localstorage for profile === 
-create profile page and wishlist and profile redux store
-create wishlist logic and wishlist redux store 
-implement authentication
-create check authentication layout for checkout 
-implement authentication with strapi and auth
-pagination
-add to cart  functionality to product card  == done
-integrate flutterwave payment 
-create  women, girls, boys pages 
-deploy frontend
-cart layout 
-deploy backend = 
-create orders contenttype  == done
+
+2 create profile page  profile redux store == 
+implement login authentication === 
+ prevent unauthenticated  nav  to  checkout 
+implement login authentication with strapi and auth ==
+add to wishlist functionality to product card == done
+integrate flutterwave payment  == 
+mobile Menu === done
+1 = create  women, girls, boys pages  == 
+frontend deploy == 
+backend  deploy ==
 
 

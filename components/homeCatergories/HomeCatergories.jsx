@@ -20,7 +20,7 @@ const HomeCatergories = () => {
     <StyledCat>
       <main className="cardContainer">
         {cardData.map((card, index) => (
-          <Card title={card.title} imgSrc={card.img} page={card.page} />
+          <Card key={card.page} title={card.title} imgSrc={card.img} page={card.page} />
         ))}
       </main>
     </StyledCat>
