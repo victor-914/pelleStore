@@ -64,17 +64,17 @@ const secNavbar = [
   {
     _id: "hjdhd",
     content: "New Arrivals",
-    link: "arrivals",
+    link: "#",
   },
   {
     _id: "hjdhddd",
     content: "Men",
-    link: "men",
+    link: "#",
   },
   {
     _id: "hjddjdjdhddd",
     content: "Women",
-    link: "women",
+    link: "#",
   },
   {
     _id: "hjdhwwddd",

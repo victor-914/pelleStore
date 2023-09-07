@@ -20,8 +20,10 @@ export async function fetcher(url, options = {}) {
       response = await api.get(url, options);
     }
   } catch (err) {
-    throw new Error(err);
+    throw err;
+    console.log(err)
   }
 
+   console.log(response.data,"response_data")
   return response?.data;
 }
