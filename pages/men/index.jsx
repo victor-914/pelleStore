@@ -5,16 +5,16 @@ import styled from "styled-components";
 import ProductCarousel from "../../components/productsCard/ProductCard";
 import api from "../../utils/api";
 import Pagination from "../../components/pagination/Pagination";
-import useSWR from 'swr'
+import useSWR from "swr";
 import { fetcher } from "../../utils/api";
 
-function MensWears({products}) {
+function MensWears({ product }) {
   const [pageIndex, setPageIndex] = useState(1);
-  const { data} = useSWR(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/products?populate=*&pagination[page]=${pageIndex}&pagination[pageSize]=1`,
+  const { data } = useSWR(
+    `https://pellestore-new-strapi.onrender.com/products?populate=*&pagination[page]=${pageIndex}&pagination[pageSize]=1`,
     fetcher,
     {
-      fallbackData: products
+      fallbackData: product,
     }
   );
 
@@ -25,7 +25,7 @@ function MensWears({products}) {
         <main className="contentHolder">
           {data?.data?.map((item) => (
             <>
-              {console.log(item,"item")}
+              {console.log(item, "item")}
               <ProductCarousel data={item} page={"men"} />
             </>
           ))}
@@ -64,13 +64,15 @@ const StyledMensWears = styled.section`
 `;
 
 export async function getStaticProps() {
-  const response = await api.get("/products?populate=*&pagination[page]=1&pagination[pageSize]=1");
-  const products = response?.data;
+  const response = await api.get(
+    "/products?populate=*&pagination[page]=1&pagination[pageSize]=1"
+  );
+  const product = response?.data;
 
   // Return product data as props
   return {
     props: {
-      products,
+      product,
     },
   };
 }
