@@ -4,8 +4,10 @@ import heroBanner from "../../assets/banner-01.jpg"
 import asideBanner from "../../assets/banner-02.jpg"
 import asideBanner2 from "../../assets/banner-03.jpg"
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 function HomePageBanner() {
+  const router = useRouter()
   return (
     <StyledBanner>
       <main className="heroBanner">
@@ -15,7 +17,9 @@ function HomePageBanner() {
               Big patterns are back in fashion
             </h2>
           
-              <button className="shopNow">
+              <button 
+               onClick={() => router.push("women")}
+              className="shopNow">
               Shop Now
               </button>
         </div>
@@ -33,7 +37,9 @@ function HomePageBanner() {
             Tha latest men's trends this season
             </h2>
           
-              <button className="shopNow">
+              <button
+               onClick={() => router.push("men")}
+              className="shopNow">
               Shop Now
               </button>
         </div>
@@ -51,7 +57,9 @@ function HomePageBanner() {
             Show your fashion with summer shoes
             </div>
           
-              <button className="shopNow">
+              <button 
+              onClick={() => router.push("#")}
+              className="shopNow">
               Shop Now
               </button>
         </div>

@@ -13,7 +13,7 @@ const secNavbar = [
   {
     _id: "hjdhd",
     content: "New Arrivals",
-    link: "arrivals",
+    link: "#",
   },
   {
     _id: "hjdhddd",
@@ -28,17 +28,17 @@ const secNavbar = [
   {
     _id: "hjdhwwddd",
     content: "Boys",
-    link: "boys",
+    link: "#",
   },
   {
     _id: "hjdhdssdd",
     content: "Girls",
-    link: "girls",
+    link: "#",
   },
   {
     _id: "hjdddhddd",
     content: "Accessories",
-    link: "accessories",
+    link: "#",
   },
 ];
 
