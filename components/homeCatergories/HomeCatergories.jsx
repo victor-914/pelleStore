@@ -8,12 +8,12 @@ import imgSix from "../../assets/top-view-open-woman-bag.jpg";
 import styled from "styled-components";
 const HomeCatergories = () => {
   const cardData = [
-    { title: "New Arrivals", img: imgOne, page: "#" },
+    { title: "New Arrivals", img: imgOne, page: "arrivals" },
     { title: "Women", img: imgTwo, page:"women" },
     { title: "Men", img: imgThree, page: "men" },
-    { title: "Girls", img: imgFour, page: "#" },
-    { title: "Boys", img: imgFive, page: "#" },
-    { title: "Accessories", img: imgSix, page: "#" },
+    { title: "Girls", img: imgFour, page: "girls" },
+    { title: "Boys", img: imgFive, page: "boys" },
+    { title: "Accessories", img: imgSix, page: "Accessories" },
   ];
 
   return (

@@ -11,7 +11,7 @@ function Footer() {
   return (
     <Box marginTop="70px" padding="40px 0" 
     // backgroundColor="red"
-    
+     
     backgroundColor={neutral.light}
     >
       <Box

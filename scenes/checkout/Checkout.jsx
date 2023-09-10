@@ -23,15 +23,13 @@ const StyledButton = styled.button`
     } */
 `;
 
-const stripePromise = loadStripe(
-  "pk_test_51LgU7yConHioZHhlAcZdfDAnV9643a7N1CMpxlKtzI1AUWLsRyrord79GYzZQ6m8RzVnVQaHsgbvN1qSpiDegoPi006QkO0Mlc"
-);
-
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
   const cart = useSelector((state) => state.cart.cart);
   const isFirstStep = activeStep === 0;
   const isSecondStep = activeStep === 1;
+  const [config, setConfig] = useState({});
+  const handleFlutterPayment = useFlutterwave(config);
 
   const handleFormSubmit = async (values, actions) => {
     setActiveStep(activeStep + 1);
@@ -54,11 +52,10 @@ const Checkout = () => {
     console.log(values);
 
     // --------------------------------------
-
-    const config = {
-      public_key: "FLWPUBK_TEST-e7c8f332b9d34b01b958cf4f4f643018-X",
+    const configObj = {
+      public_key: "FLWPUBK_TEST-4eac3c26b58ff5baf437340ddca82752-X",
       tx_ref: Date.now(),
-      amount: amount ? amount : 5000,
+      amount: 5000,
       currency: "NGN",
       payment_options: "card,mobilemoney,ussd",
       customer: {
@@ -72,9 +69,8 @@ const Checkout = () => {
       },
     };
 
-    const handleFlutterPayment = useFlutterwave(config);
-
-    const stripe = await stripePromise;
+    setConfig(configObj);
+    // const stripe = await stripePromise;
     const requestBody = {
       userName: [values.firstName, values.lastName].join(" "),
       email: values.email,
@@ -160,21 +156,27 @@ const Checkout = () => {
                     Back
                   </StyledButton>
                 )}
-                <StyledButton
-                  onClick={() =>
-                    handleFlutterPayment({
-                      callback: (response) => {
-                        console.log(response, "flutterwave");
-                        closePaymentModal();
-                      },
-                      onClose: () => {},
-                    })
-                  }
-                  fullWidth
-                  type="submit"
-                >
+                {/* <StyledButton fullWidth type="submit">
                   {!isSecondStep ? "Next" : "Place Order"}
-                </StyledButton>
+                </StyledButton> */}
+
+                {!isSecondStep ? (
+                  <StyledButton
+                    onClick={() => {
+                      handleFlutterPayment({
+                        callback: (response) => {
+                          console.log(response);
+                          closePaymentModal();
+                        },
+                        onClose: () => {},
+                      });
+                    }}
+                  >
+                    pay
+                  </StyledButton>
+                ) : (
+                  <StyledButton>nothing</StyledButton>
+                )}
               </Box>
             </form>
           )}

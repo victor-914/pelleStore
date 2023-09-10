@@ -5,7 +5,10 @@ import styled from "styled-components";
 const Card = ({ title, imgSrc, page }) => {
   const router = useRouter();
   return (
-    <StyledCard onClick={() => router.push(page)}>
+    <StyledCard onClick={() => router.push({
+      pathname:"/products",
+      query: { catergory: `${page}` },
+    })}>
       <div className="title">{title}</div>
       <main className="imageHolder">
         <Image src={imgSrc} layout="fill" />
