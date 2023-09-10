@@ -8,23 +8,20 @@ import Payment from "./Payment";
 import Shipping from "./Shipping";
 import { loadStripe } from "@stripe/stripe-js";
 import styled from "styled-components";
+import { useFlutterwave } from "flutterwave-react-v3";
 
-  const StyledButton = styled.button`
-    width:100%;
+const StyledButton = styled.button`
+  width: 100%;
 
-    height:40px;
-    background-color: #000;
-    color: #fff;
-    
+  height: 40px;
+  background-color: #000;
+  color: #fff;
 
-    /* :hover{
+  /* :hover{
       background-color: #fff;
     color: #000;
     } */
-
-
-
-  `
+`;
 
 const stripePromise = loadStripe(
   "pk_test_51LgU7yConHioZHhlAcZdfDAnV9643a7N1CMpxlKtzI1AUWLsRyrord79GYzZQ6m8RzVnVQaHsgbvN1qSpiDegoPi006QkO0Mlc"
@@ -54,6 +51,29 @@ const Checkout = () => {
   };
 
   async function makePayment(values) {
+    console.log(values);
+
+    // --------------------------------------
+
+    const config = {
+      public_key: "FLWPUBK_TEST-e7c8f332b9d34b01b958cf4f4f643018-X",
+      tx_ref: Date.now(),
+      amount: amount ? amount : 5000,
+      currency: "NGN",
+      payment_options: "card,mobilemoney,ussd",
+      customer: {
+        email: values.email,
+        phone_number: values.phoneNumber,
+      },
+      customizations: {
+        title: "my Payment Title",
+        description: "Payment for items in cart",
+        logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+      },
+    };
+
+    const handleFlutterPayment = useFlutterwave(config);
+
     const stripe = await stripePromise;
     const requestBody = {
       userName: [values.firstName, values.lastName].join(" "),
@@ -126,8 +146,7 @@ const Checkout = () => {
                   <StyledButton
                     fullWidth
                     color="primary"
-                  variant="contained"
-                  
+                    variant="contained"
                     // backgroundColor="red"
                     sx={{
                       backgroundColor: "red",
@@ -142,6 +161,15 @@ const Checkout = () => {
                   </StyledButton>
                 )}
                 <StyledButton
+                  onClick={() =>
+                    handleFlutterPayment({
+                      callback: (response) => {
+                        console.log(response, "flutterwave");
+                        closePaymentModal();
+                      },
+                      onClose: () => {},
+                    })
+                  }
                   fullWidth
                   type="submit"
                 >

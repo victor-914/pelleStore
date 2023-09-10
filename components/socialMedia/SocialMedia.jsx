@@ -32,7 +32,7 @@ function SocialMedia() {
       <main className="socialContainer">
         {images.map((item) => (
           <div className="socials">
-            <InstagramEmbed url={item.img} width={"100%"} />
+            <InstagramEmbed placeholderDisabled url={item.img} width={"100%"} />
           </div>
         ))}
       </main>
@@ -46,7 +46,7 @@ const StyledSocialMedia = styled.section`
   width: 90%;
   /* padding: 40px; */
   margin: auto;
-  /* height:; */
+  height:auto;
 
   header {
     width: 100%;
@@ -106,6 +106,7 @@ const StyledSocialMedia = styled.section`
 
     .socialContainer {
       flex-direction: column;
+      height: auto;
     }
 
     .socials {

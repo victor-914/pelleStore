@@ -16,6 +16,7 @@ import styled from "styled-components";
 import { setIsmMenuOpen } from "../../state/mobilemenu";
 import { AiOutlineHeart } from "react-icons/ai";
 import { setIsWishListOpen } from "../../state/wishlist";
+import navigate from "../../utils/navigateHook";
 
 const StyledSecNavBar = styled.section`
   width: 100%;
@@ -69,27 +70,27 @@ const secNavbar = [
   {
     _id: "hjdhddd",
     content: "Men",
-    link: "#",
+    link: "men",
   },
   {
     _id: "hjddjdjdhddd",
     content: "Women",
-    link: "#",
+    link: "women",
   },
   {
     _id: "hjdhwwddd",
     content: "Boys",
-    link: "#",
+    link: "boys",
   },
   {
     _id: "hjdhdssdd",
     content: "Girls",
-    link: "#",
+    link: "girls",
   },
   {
     _id: "hjdddhddd",
     content: "Accessories",
-    link: "#",
+    link: "accessories",
   },
 ];
 function Navbar() {
@@ -102,7 +103,15 @@ function Navbar() {
       <StyledSecNavBar className="">
         <main className="secBar">
           {secNavbar.map((item) => (
-            <li key={item._id} onClick={() => router.push(`${item.link}`)}>
+            <li
+              key={item._id}
+              onClick={() => {
+                router.push({
+                  pathname: "/products",
+                  query: { catergory: `${item.link}` },
+                });
+              }}
+            >
               {item.content}
             </li>
           ))}

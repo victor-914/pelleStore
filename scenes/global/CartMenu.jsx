@@ -24,10 +24,13 @@ const CartMenu = () => {
   const cart = useSelector((state) => state.cart.cart);
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
   const totalPrice = cart.reduce((total, item) => {
-    return total + item.count * item.attributes.product_discount_price;
+    console.log(item, "item");
+    return (
+      total + item?.count * item?.attributes?.product_discount_price
+    );
   }, 0);
 
-  const router = useRouter()
+  const router = useRouter();
   return (
     <Box
       display={isCartOpen ? "flex" : "none"}
@@ -63,6 +66,7 @@ const CartMenu = () => {
               <Box key={`${item?.attributes?.product_name}-${item.id}`}>
                 <FlexBox p="15px 0">
                   <Box flex="1 1 40%">
+                    {console.log(item,"item")}
                     <img
                       alt={item?.product_name}
                       width="123px"

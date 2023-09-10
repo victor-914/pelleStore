@@ -24,6 +24,5 @@ export async function fetcher(url, options = {}) {
     console.log(err)
   }
 
-   console.log(response.data,"response_data")
   return response?.data;
 }

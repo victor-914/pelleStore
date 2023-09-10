@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../state";
 import { addToWishList } from "../../state/wishlist";
 
-const ProductCarousel = ({ data, page }) => {
+const ProductCarousel = ({ data}) => {
   const count = 1;
   const router = useRouter();
   //  const cart   = useSelector((state) => state.cart.cart)
@@ -92,7 +92,7 @@ const ProductCarousel = ({ data, page }) => {
                 <div
                   className="iconCont"
                   onClick={() => {
-                    router.push(`/${page}/${data.id}`),
+                    router.push(`/products/${data.id}`),
                       toast("Navigating to Product Page", {
                         hideProgressBar: true,
                         autoClose: 1000,
