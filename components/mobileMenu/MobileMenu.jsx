@@ -28,17 +28,17 @@ const secNavbar = [
   {
     _id: "hjdhwwddd",
     content: "Boys",
-    link: "#",
+    link: "boys",
   },
   {
     _id: "hjdhdssdd",
     content: "Girls",
-    link: "#",
+    link: "girls",
   },
   {
     _id: "hjdddhddd",
     content: "Accessories",
-    link: "#",
+    link: "Accessories",
   },
 ];
 
@@ -90,7 +90,10 @@ function MobileMenu() {
         <MenuItem
           key={item._id}
           onClick={() => {
-            router.push(item.link);
+            router.push({
+              pathname: "/products",
+              query: { catergory: `${item.link}` },
+            });
           }}
         >
           <span onClick={() => dispatch(setIsmMenuOpen({}))}>
