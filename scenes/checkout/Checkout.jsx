@@ -1,14 +1,17 @@
-import { useSelector } from "react-redux";
-import { Box, Button, Stepper, Step, StepLabel } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
-import { shades } from "../../theme";
 import Payment from "./Payment";
 import Shipping from "./Shipping";
-import { loadStripe } from "@stripe/stripe-js";
 import styled from "styled-components";
-import { useFlutterwave } from "flutterwave-react-v3";
+import { useRouter } from "next/router";
+import {
+  setBillingAddress,
+  setShippingAddress,
+  setUserDetails,
+} from "../../state/profile";
 
 const StyledButton = styled.button`
   width: 100%;
@@ -28,9 +31,9 @@ const Checkout = () => {
   const cart = useSelector((state) => state.cart.cart);
   const isFirstStep = activeStep === 0;
   const isSecondStep = activeStep === 1;
-  const [config, setConfig] = useState({});
-  const handleFlutterPayment = useFlutterwave(config);
-
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   const handleFormSubmit = async (values, actions) => {
     setActiveStep(activeStep + 1);
 
@@ -42,54 +45,23 @@ const Checkout = () => {
     }
 
     if (isSecondStep) {
-      makePayment(values);
+      // makePayment(values);
+      dispatch(setShippingAddress(values));
+      dispatch(
+        setUserDetails({
+          email: values.email,
+          phoneNumber: values.phoneNumber,
+        })
+      );
+      dispatch(setBillingAddress(values));
     }
 
     actions.setTouched({});
   };
 
-  async function makePayment(values) {
-    console.log(values);
-
-    // --------------------------------------
-    const configObj = {
-      public_key: "FLWPUBK_TEST-4eac3c26b58ff5baf437340ddca82752-X",
-      tx_ref: Date.now(),
-      amount: 5000,
-      currency: "NGN",
-      payment_options: "card,mobilemoney,ussd",
-      customer: {
-        email: values.email,
-        phone_number: values.phoneNumber,
-      },
-      customizations: {
-        title: "my Payment Title",
-        description: "Payment for items in cart",
-        logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
-      },
-    };
-
-    setConfig(configObj);
-    // const stripe = await stripePromise;
-    const requestBody = {
-      userName: [values.firstName, values.lastName].join(" "),
-      email: values.email,
-      products: cart.map(({ id, count }) => ({
-        id,
-        count,
-      })),
-    };
-
-    // const response = await fetch("http://localhost:2000/api/orders", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(requestBody),
-    // });
-    // const session = await response.json();
-    // await stripe.redirectToCheckout({
-    //   sessionId: session.id,
-    // });
-  }
+  // async function makePayment(values) {
+  //   console.log(values);
+  // }
 
   return (
     <Box width="80%" m="100px auto">
@@ -143,7 +115,6 @@ const Checkout = () => {
                     fullWidth
                     color="primary"
                     variant="contained"
-                    // backgroundColor="red"
                     sx={{
                       backgroundColor: "red",
                       boxShadow: "none",
@@ -156,27 +127,17 @@ const Checkout = () => {
                     Back
                   </StyledButton>
                 )}
-                {/* <StyledButton fullWidth type="submit">
-                  {!isSecondStep ? "Next" : "Place Order"}
-                </StyledButton> */}
-
-                {!isSecondStep ? (
-                  <StyledButton
-                    onClick={() => {
-                      handleFlutterPayment({
-                        callback: (response) => {
-                          console.log(response);
-                          closePaymentModal();
-                        },
-                        onClose: () => {},
-                      });
-                    }}
-                  >
-                    pay
-                  </StyledButton>
-                ) : (
-                  <StyledButton>nothing</StyledButton>
-                )}
+                <StyledButton fullWidth type="submit">
+                  {!isSecondStep ? (
+                    "Next"
+                  ) : (
+                    <StyledButton
+                      onClick={() => router.push("_productCheckout")}
+                    >
+                      Proceed to Checkout Page
+                    </StyledButton>
+                  )}
+                </StyledButton>
               </Box>
             </form>
           )}

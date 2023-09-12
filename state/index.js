@@ -16,8 +16,19 @@ export const cartSlice = createSlice({
     },
 
     addToCart: (state, action) => {
-       console.log(action.payload,"catrtitself")
-      state.cart = [...state.cart, action.payload.item];
+      console.log(action.payload, "catrtitself");
+
+      const isDuplicate = state.cart.some(
+        (item) => item.id === action.payload.item.id
+      );
+
+      if (!isDuplicate) {
+        state.cart = [...state.cart, action.payload.item];
+
+      }
+      // console.log(action, "action", isDuplicate);
+
+     
     },
 
     removeFromCart: (state, action) => {

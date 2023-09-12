@@ -38,7 +38,8 @@ const StyledCatergories = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 50px;
+    text-align: center;
+    font-size: 40px;
     font-weight: 800;
     color: #fff;
     letter-spacing: 1px;
@@ -50,11 +51,11 @@ const StyledCatergories = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 20px;
+    text-align: center;
     margin: auto;
-    font-weight: 600;
+    font-weight: 400;
     color: #000;
-    background-color: green;
     letter-spacing: 0.5px;
   }
 `;

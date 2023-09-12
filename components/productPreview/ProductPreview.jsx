@@ -3,52 +3,98 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { IoCloseOutline } from "react-icons/io5";
 import Image from "next/image";
+import { useFlutterwave } from "flutterwave-react-v3";
+
 function ProductPreview() {
   const cart = useSelector((state) => state.cart.cart);
   const totalPrice = cart.reduce((total, item) => {
-    console.log(item, "item");
+    // console.log(item, "item");
     return total + item?.count * item?.attributes?.product_discount_price;
   }, 0);
 
-  const subTotalPrice = cart.foreach((item) => {
-    console.log(item, "item");
-    return item?.count * item?.attributes?.product_discount_price;
-  }, 0);
+  console.log(cart, "cart@productREview");
+  // const configObj = {
+  //   public_key: "FLWPUBK_TEST-4eac3c26b58ff5baf437340ddca82752-X",
+  //   tx_ref: Date.now(),
+  //   amount: 5000,
+  //   currency: "NGN",
+  //   payment_options: "card,mobilemoney,ussd",
+  //   customer: {
+  //     email: values.email,
+  //     phone_number: values.phoneNumber,
+  //   },
+  //   customizations: {
+  //     title: "my Payment Title",
+  //     description: "Payment for items in cart",
+  //     logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+  //   },
+  // };
+
+  // setConfig(configObj);
+  // const stripe = await stripePromise;
+  // const requestBody = {
+  //   userName: [values.firstName, values.lastName].join(" "),
+  //   email: values.email,
+  //   products: cart.map(({ id, count }) => ({
+  //     id,
+  //     count,
+  //   })),
+  // };
+
+  // const subTotalPrice = cart.foreach((item) => {
+  //   // console.log(item, "item");
+  //   return item?.count * item?.attributes?.product_discount_price;
+  // }, 0);
+
+  // const handleFlutterPayment = useFlutterwave(config);
+  // const response = await fetch("http://localhost:2000/api/orders", {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify(requestBody),
+  // });
+  // const session = await response.json();
+  // await stripe.redirectToCheckout({
+  //   sessionId: session.id,
+  // });
   return (
     <StyledPreview>
       <div class="small-container cart-page">
         <table>
-          <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-          </tr>
-
-          {cart?.map((item) => (
-            <tr key={item.id}>
-              <td>
-                <div class="cart-info">
-                  <Image
-                    width="80px"
-                    height="80px"
-                    src={`${item?.attributes?.product_images?.data[0]?.attributes?.url}`}
-                    className="checkout_img"
-                  />
-                  <div className="item_content">
-                    <p>{item?.attributes?.product_name}</p>
-                    <small>{item?.attributes?.product_discount_price}</small>
-                    {/* <br> */}
-                    <span className="iconHolder">
-                      <IoCloseOutline />
-                    </span>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <input type="number" value={item?.count} />
-              </td>
-              <td>&#x20A6; {subTotalPrice}</td>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
             </tr>
+          </thead>
+          {/* <tbody> */}
+          {cart?.map((item) => (
+            <tbody>
+              <tr key={item.id}>
+                <td>
+                  <div class="cart-info">
+                    <Image
+                      width="80px"
+                      height="80px"
+                      src={`${item?.attributes?.product_images?.data[0]?.attributes?.url}`}
+                      className="checkout_img"
+                    />
+                    <div className="item_content">
+                      <p>{item?.attributes?.product_name}</p>
+                      <small>{item?.attributes?.product_discount_price}</small>
+                      {/* <br> */}
+                      <span className="iconHolder">
+                        <IoCloseOutline />
+                      </span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <input type="number" value={item?.count} />
+                </td>
+                <td>&#x20A6; {subTotalPrice}</td>
+              </tr>
+            </tbody>
           ))}
         </table>
         <div class="total-price">
@@ -72,7 +118,15 @@ function ProductPreview() {
               borderRadius: 0,
               //   padding: "15px 40px",
             }}
-            // onClick={() => setActiveStep(activeStep - 1)}
+            onClick={() =>
+              handleFlutterPayment({
+                callback: (response) => {
+                  console.log(response);
+                  closePaymentModal();
+                },
+                onClose: () => {},
+              })
+            }
           >
             Pay with Flutterwave
           </StyledButton>
@@ -123,8 +177,6 @@ const StyledPreview = styled.section`
     font-weight: 800;
   }
   .checkout_img {
-    /* margin: 9px; */
-    /* margin-right: 10px; */
     position: relative;
     margin: 10px;
   }
