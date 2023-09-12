@@ -15,10 +15,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../state";
 import { addToWishList } from "../../state/wishlist";
 
-const ProductCarousel = ({ data}) => {
+const ProductCarousel = ({ data }) => {
   const count = 1;
   const router = useRouter();
-  //  const cart   = useSelector((state) => state.cart.cart)
   const dispatch = useDispatch();
   const isNonMobile = useMediaQuery("(min-width:600px)");
   return (
@@ -72,57 +71,69 @@ const ProductCarousel = ({ data}) => {
                 layout="fill"
                 className="img"
               />
-              {console.log(texture, "djdj")}
-              <section className="accesoriesCont">
-                <div
-                  className="iconCont"
-                  onClick={() => {
-                    toast("Product Added to Cart", {
-                      hideProgressBar: true,
-                      autoClose: 1000,
-                      type: "success",
-                    }),
-                      dispatch(addToCart({ item: { ...data, count } }));
-                  }}
-                  title="Add to cart"
-                >
-                  <FaShoppingCart className="icon" />
-                </div>
-
-                <div
-                  className="iconCont"
-                  onClick={() => {
-                    router.push(`/products/${data.id}`),
-                      toast("Navigating to Product Page", {
-                        hideProgressBar: true,
-                        autoClose: 1000,
-                        type: "success",
-                      });
-                  }}
-                  title="View product"
-                >
-                  <AiFillEye className="icon" />
-                </div>
-
-                <div
-                  className="iconCont"
-                  onClick={() => {
-                    toast(" Added to Wishlist", {
-                      hideProgressBar: true,
-                      autoClose: 2000,
-                      type: "success",
-                    }),
-                      dispatch(addToWishList({ item: { ...data, count } }));
-                  }}
-                  title="Add to wishlist"
-                >
-                  <AiFillHeart className="icon" />
-                </div>
-              </section>
             </main>
           </>
         ))}
       </Carousel>
+
+      <div class="showcase-content">
+
+        <h3>
+          <p class="showcase-title">{data?.attributes?.product_name}</p>
+        </h3>
+
+        <div class="price-box">
+          <p class="price">&#x20A6;{data?.attributes?.product_discount_price}</p>
+          <del>&#x20A6;{data?.attributes?.product_price}</del>
+        </div>
+      </div>
+
+      <section className="accesoriesCont">
+        <div
+          className="iconCont"
+          onClick={() => {
+            toast("Product Added to Cart", {
+              hideProgressBar: true,
+              autoClose: 1000,
+              type: "success",
+            }),
+              dispatch(addToCart({ item: { ...data, count } }));
+          }}
+          title="Add to cart"
+        >
+          <FaShoppingCart className="icon" />
+        </div>
+
+        <div
+          className="iconCont"
+          onClick={() => {
+            router.push(`/products/${data.id}`),
+              toast("Navigating to Product Page", {
+                hideProgressBar: true,
+                autoClose: 1000,
+                type: "success",
+              });
+          }}
+          title="View product"
+        >
+          <AiFillEye className="icon" />
+        </div>
+
+        <div
+          className="iconCont"
+          onClick={() => {
+            toast(" Added to Wishlist", {
+              hideProgressBar: true,
+              autoClose: 2000,
+              type: "success",
+            }),
+              dispatch(addToWishList({ item: { ...data, count } }));
+          }}
+          title="Add to wishlist"
+        >
+          <AiFillHeart className="icon" />
+        </div>
+      </section>
     </StyledProductCarousel>
   );
 };
@@ -142,21 +153,20 @@ const StyledProductCarousel = styled.section`
 
   .imgCarouselCont {
     width: 100%;
-    height: 400px;
+    height: 300px;
     position: relative;
   }
 
   .accesoriesCont {
     width: 100%;
-    height: 100%;
-    background-color: transparent;
-    position: absolute;
+    /* position: absolute; */
     /* z-index: 100; */
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
-    padding-bottom: 20px;
-    visibility: hidden;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    /* visibility: hidden; */
   }
 
   .iconCont {
@@ -181,4 +191,26 @@ const StyledProductCarousel = styled.section`
   :hover .accesoriesCont {
     visibility: visible;
   }
+
+  .price-box {
+    display: flex;
+    padding: 5px;
+    font-size: 10;
+    flex-direction: column;
+    /* justify-content: space-around; */
+  }
+
+  .price{
+    font-weight: 600;
+    font-size: 14px;
+    /* padding: 5px; */
+
+  }
+  .showcase-title {
+    /* background-color: green; */
+    font-weight: 400;
+    font-size: 16px;
+    padding: 5px;
+  }
+
 `;
