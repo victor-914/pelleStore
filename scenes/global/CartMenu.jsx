@@ -1,4 +1,4 @@
-import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Typography, useMediaQuery } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
@@ -12,6 +12,7 @@ import {
   setIsCartOpen,
 } from "../../state";
 import { useRouter } from "next/router";
+
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -27,7 +28,7 @@ const CartMenu = () => {
     console.log(item, "item");
     return total + item?.count * item?.attributes?.product_discount_price;
   }, 0);
-
+  const isNonMobile = useMediaQuery("(min-width:600px)");
   const router = useRouter();
   return (
     <Box
@@ -45,9 +46,9 @@ const CartMenu = () => {
         position="fixed"
         right="0"
         bottom="0"
-        width="30%"
+        width={`${isNonMobile ? "30%" : "100%"}`}
         height="100%"
-        backgroundColor="red"
+        backgroundColor="#fff"
       >
         <Box padding="30px" overflow="auto" height="100%">
           {/* HEADER */}

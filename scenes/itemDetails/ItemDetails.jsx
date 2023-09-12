@@ -76,15 +76,20 @@ const ItemDetails = ({ data }) => {
                 </IconButton>
               )}
             >
-              {product?.attributes?.product_images?.data?.map((texture, index) => (
-                <div  className="imageContainer" key={`carousel-image-${index}`}>
-                  <Image
-                    src={texture?.attributes?.url}
-                    alt={`carousel-${index}`}
-                    layout="fill"
-                  />
-                </div>
-              ))}
+              {product?.attributes?.product_images?.data?.map(
+                (texture, index) => (
+                  <div
+                    className="imageContainer"
+                    key={`carousel-image-${index}`}
+                  >
+                    <Image
+                      src={texture?.attributes?.url}
+                      alt={`carousel-${index}`}
+                      layout="fill"
+                    />
+                  </div>
+                )
+              )}
             </Carousel>
           </Box>
 
@@ -92,31 +97,28 @@ const ItemDetails = ({ data }) => {
           <Box flex="1 1 50%" mb="40px">
             <Box m="65px 0 25px 0">
               <Typography variant="h3">
-                TITLE: {data?.attributes?.product_name}
+                title: {product?.attributes?.product_name}
               </Typography>
               <Typography>
                 {" "}
-                OLD PRICE: ${data?.attributes?.product_price}
+                price:&#8358; {product?.attributes?.product_price}
               </Typography>
-              <Typography>
-                {" "}
-                NEW PRICE${data?.attributes?.product_discount_price}
-              </Typography>
+              <del> &#8358; {product?.attributes?.product_discount_price}</del>
 
               <Typography sx={{ mt: "20px" }}>
-                {data?.attributes?.product_description}
+                {product?.attributes?.product_description}
               </Typography>
               <Typography sx={{ mt: "5px" }}>
-                CATERGORY: {data?.attributes?.product_catergory}
+                catergory: {product?.attributes?.product_catergory}
               </Typography>
               <Typography sx={{ mt: "5px" }}>
-                MATERIAL: {data?.attributes?.product_material}
+                material: {product?.attributes?.product_material}
               </Typography>
               <Typography sx={{ mt: "5px" }}>
-                SIZE: {data?.attributes?.product_size}
+                size: {product?.attributes?.product_size}
               </Typography>
               <Typography sx={{ mt: "5px" }}>
-                COLOR: {data?.attributes?.product_color}
+                color: {product?.attributes?.product_color}
               </Typography>
             </Box>
 
@@ -139,7 +141,7 @@ const ItemDetails = ({ data }) => {
               <Button
                 sx={{
                   backgroundColor: "#000",
-                  color: "#000",
+                  color: "#fff",
                   borderRadius: 0,
                   minWidth: "150px",
                   padding: "10px 40px",
@@ -202,11 +204,10 @@ export default ItemDetails;
 const StyledItemsPage = styled.section`
   padding-top: 140px;
 
-  .imageContainer{
+  .imageContainer {
     background-color: red;
     position: relative;
     width: 100%;
     height: 50vh;
   }
-  
 `;
