@@ -1,34 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { IoCloseOutline } from "react-icons/io5";
 import Image from "next/image";
 import { useFlutterwave } from "flutterwave-react-v3";
+import { useRouter } from "next/router";
+// import { router } from "json-server";
 
 function ProductPreview() {
+  const [totalPrice, setTotalPrice] = useState();
+  const [subTotalPrice, setSubTotalPrice] = useState();
+  const router = useRouter()
   const cart = useSelector((state) => state.cart.cart);
-  const totalPrice = cart.reduce((total, item) => {
-    // console.log(item, "item");
-    return total + item?.count * item?.attributes?.product_discount_price;
-  }, 0);
+  const user = useSelector((state) => state.user.user);
+  useEffect(() => {
+    setTotalPrice(
+      cart &&
+        cart.reduce((total, item) => {
+          return total + item?.count * item?.attributes?.product_discount_price;
+        }, 0)
+    );
 
-  console.log(cart, "cart@productREview");
-  // const configObj = {
-  //   public_key: "FLWPUBK_TEST-4eac3c26b58ff5baf437340ddca82752-X",
-  //   tx_ref: Date.now(),
-  //   amount: 5000,
-  //   currency: "NGN",
-  //   payment_options: "card,mobilemoney,ussd",
-  //   customer: {
-  //     email: values.email,
-  //     phone_number: values.phoneNumber,
-  //   },
-  //   customizations: {
-  //     title: "my Payment Title",
-  //     description: "Payment for items in cart",
-  //     logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
-  //   },
-  // };
+    setSubTotalPrice(
+      cart &&
+        cart.map((item) => {
+          return item?.count * item?.attributes?.product_discount_price;
+        }, 0)
+    );
+
+    return () => {};
+  }, []);
+
+  console.log(cart, "cart@productREview", user);
+  const configObj = {
+    public_key: "FLWPUBK_TEST-4eac3c26b58ff5baf437340ddca82752-X",
+    tx_ref: Date.now(),
+    amount: totalPrice,
+    currency: "NGN",
+    payment_options: "card,mobilemoney,ussd",
+    customer: {
+      email: user.userInfo.email,
+      phone_number: user.userInfo.phoneNumber,
+    },
+    customizations: {
+      title: "ViolaPelle Payout",
+      description: "Payment for items in cart",
+      logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+    },
+  };
 
   // setConfig(configObj);
   // const stripe = await stripePromise;
@@ -41,12 +60,8 @@ function ProductPreview() {
   //   })),
   // };
 
-  // const subTotalPrice = cart.foreach((item) => {
-  //   // console.log(item, "item");
-  //   return item?.count * item?.attributes?.product_discount_price;
-  // }, 0);
+  const handleFlutterPayment = useFlutterwave(configObj);
 
-  // const handleFlutterPayment = useFlutterwave(config);
   // const response = await fetch("http://localhost:2000/api/orders", {
   //   method: "POST",
   //   headers: { "Content-Type": "application/json" },
@@ -121,8 +136,8 @@ function ProductPreview() {
             onClick={() =>
               handleFlutterPayment({
                 callback: (response) => {
-                  console.log(response);
-                  closePaymentModal();
+                  // console.log(response);
+                    router.push("/")
                 },
                 onClose: () => {},
               })
