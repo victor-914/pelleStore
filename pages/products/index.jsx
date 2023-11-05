@@ -39,28 +39,27 @@ function ProductListing({ productResult }) {
     <>
       {/* {state === "loading" ? <Loading /> : null} */}
       {/* {state === "success" ? ( */}
-        <>
-          <CatergoriesHeader image={mensWear} text="Our latest Products" />
-          <StyledProductListing>
-            {product.length !== 0 ? (
-              <main className="contentHolder">
-                {product?.map((item) => (
-                  <>
-                    <ProductCarousel data={item} page={"men"} />
-                  </>
-                ))}
-              </main>
-            ) : (
-              <div className="noProduct">No product yet</div>
-            )}
-            <Pagination
-              data={data?.meta}
-              stateIndex={pageIndex}
-              setstateIndex={setPageIndex}
-            />
-          </StyledProductListing>{" "}
-        </>
-      {/* ) : null} */}
+      <>
+        <CatergoriesHeader image={mensWear} text="Our latest Products" />
+        <StyledProductListing>
+          {product.length !== 0 ? (
+            <main className="contentHolder">
+              {product?.map((item) => (
+                <>
+                  <ProductCarousel data={item} page={"men"} />
+                </>
+              ))}
+            </main>
+          ) : (
+            <div className="noProduct">No product yet</div>
+          )}
+          <Pagination
+            data={data?.meta}
+            stateIndex={pageIndex}
+            setstateIndex={setPageIndex}
+          />
+        </StyledProductListing>{" "}
+      </>
     </>
   );
 }
