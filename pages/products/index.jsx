@@ -14,11 +14,12 @@ import Loading from "../../components/loading/Loading";
 function ProductListing({ productResult }) {
   const [pageIndex, setPageIndex] = useState(1);
   const [product, setProduct] = useState([]);
+  console.log("🚀 ~ product:", product)
   const [state, setState] = useState("loading");
 
   const router = useRouter();
   const { data } = useSWR(
-    `https://pellestore-new-strapi.onrender.com/products?populate=*&pagination[page]=${pageIndex}&pagination[pageSize]=1`,
+    `https://be.violapellefashion.com/api/products?populate=*&pagination[page]=${pageIndex}&pagination[pageSize]=1`,
     fetcher,
     {
       fallbackData: productResult,
@@ -28,6 +29,7 @@ function ProductListing({ productResult }) {
   useEffect(() => {
     setState("loading");
     setProduct(filterByCategory(data?.data, router.query.catergory));
+    setProduct(data?.data);
     setState("success");
     return () => {
       setProduct([]);
@@ -100,15 +102,15 @@ export const StyledProductListing = styled.section`
 
 export async function getStaticProps() {
   const response = await api.get(
-    "https://pellestore-new-strapi.onrender.com/api/products?populate=*&pagination[page]=1&pagination[pageSize]=1"
-  );
+    "https://be.violapellefashion.com/api/products?populate=*&pagination[page]=1&pagination[pageSize]=1"
+    );
 
-  let productResult = response.data;
-
-  // Return product data as props
-  return {
-    props: {
-      productResult,
-    },
-  };
-}
+    let productResult = response.data;
+  
+    // Return product data as props
+    return {
+      props: {
+        productResult,
+      },revalidate: 60
+    };
+  }

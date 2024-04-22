@@ -14,7 +14,7 @@ export default PerProduct;
 
 export async function getStaticProps({ params }) {
   const response = await api(
-    `https://pellestore-new-strapi.onrender.com/api/products/${params.productId.toString()}/?populate=*`
+    `https://be.violapellefashion.com/api/products/${params.productId.toString()}/?populate=*`
   );
 
   let productResult = response.data;
@@ -23,13 +23,12 @@ export async function getStaticProps({ params }) {
     props: {
       productResult,
     },
+    revalidate: 60,
   };
 }
 
 export async function getStaticPaths() {
-  const response = await api(
-    "https://pellestore-new-strapi.onrender.com/api/products"
-  );
+  const response = await api("https://be.violapellefashion.com/api/products");
 
   const products = response?.data?.data;
   // console.log(products, "ddh");

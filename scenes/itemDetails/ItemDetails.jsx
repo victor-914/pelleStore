@@ -5,14 +5,12 @@ import { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../../theme";
-import { addToCart } from "../../state";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Image from "next/image";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { useRouter } from "next/router";
 const ItemDetails = ({ data }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
@@ -21,6 +19,10 @@ const ItemDetails = ({ data }) => {
   const [item, setItem] = useState(null);
   const [items, setItems] = useState([]);
   const [product, setProduct] = useState([]);
+
+  const router = useRouter()
+
+  const message = `Hello Violapelle store, I would like to purchase  this product:(https://violapellefashion.com${router.asPath})`;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -45,51 +47,48 @@ const ItemDetails = ({ data }) => {
               swipeable={false}
               showStatus={false}
               autoPlay={true}
-              renderArrowPrev={(onClickHandler, hasPrev, label) => (
-                <IconButton
-                  onClick={onClickHandler}
-                  sx={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "0",
-                    color: "white",
-                    padding: "5px",
-                    zIndex: "10",
-                  }}
-                >
-                  <NavigateBeforeIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-              )}
-              renderArrowNext={(onClickHandler, hasNext, label) => (
-                <IconButton
-                  onClick={onClickHandler}
-                  sx={{
-                    position: "absolute",
-                    top: "50%",
-                    right: "0",
-                    color: "white",
-                    padding: "5px",
-                    zIndex: "10",
-                  }}
-                >
-                  <NavigateNextIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-              )}
+
+              // renderArrowPrev={(onClickHandler, hasPrev, label) => (
+              //   <IconButton
+              //     onClick={onClickHandler}
+              //     sx={{
+              //       position: "absolute",
+              //       top: "50%",
+              //       left: "0",
+              //       color: "white",
+              //       padding: "5px",
+              //       zIndex: "10",
+              //     }}
+              //   >
+              //     <NavigateBeforeIcon sx={{ fontSize: 40 }} />
+              //   </IconButton>
+              // )}
+              // renderArrowNext={(onClickHandler, hasNext, label) => (
+              //   <IconButton
+              //     onClick={onClickHandler}
+              //     sx={{
+              //       position: "absolute",
+              //       top: "50%",
+              //       right: "0",
+              //       color: "white",
+              //       padding: "5px",
+              //       zIndex: "10",
+              //     }}
+              //   >
+              //     <NavigateNextIcon sx={{ fontSize: 40 }} />
+              //   </IconButton>
+              // )}
             >
-              {product?.attributes?.product_images?.data?.map(
-                (texture, index) => (
-                  <div
-                    className="imageContainer"
-                    key={`carousel-image-${index}`}
-                  >
-                    <Image
-                      src={texture?.attributes?.url}
-                      alt={`carousel-${index}`}
-                      layout="fill"
-                    />
-                  </div>
-                )
-              )}
+              {product?.attributes?.images?.data?.map((texture, index) => (
+                <div className="imageContainer" key={`carousel-image-${index}`}>
+                  <Image
+                    src={texture?.attributes?.url}
+                    alt={`carousel-${index}`}
+                    layout="fill"
+                    objectFit="contain"
+                  />
+                </div>
+              ))}
             </Carousel>
           </Box>
 
@@ -97,29 +96,28 @@ const ItemDetails = ({ data }) => {
           <Box flex="1 1 50%" mb="40px">
             <Box m="65px 0 25px 0">
               <Typography variant="h3">
-                title: {product?.attributes?.product_name}
+                Title: {product?.attributes?.title}
               </Typography>
               <Typography>
                 {" "}
-                price:&#8358; {product?.attributes?.product_price}
+                Price:&#8358; {product?.attributes?.price}
               </Typography>
-              <del> &#8358; {product?.attributes?.product_discount_price}</del>
+              {/* <del> &#8358; {product?.attributes?.product_discount_price}</del> */}
 
-              <Typography sx={{ mt: "20px" }}>
-                {product?.attributes?.product_description}
-              </Typography>
+              {/* <Typography sx={{ mt: "20px" }}>
+              </Typography> */}
               <Typography sx={{ mt: "5px" }}>
-                catergory: {product?.attributes?.product_catergory}
+                Catergory: {product?.attributes?.catergory}
               </Typography>
+              {/* <Typography sx={{ mt: "5px" }}>
+                material: {product?.attributes?.material}
+              </Typography> */}
               <Typography sx={{ mt: "5px" }}>
-                material: {product?.attributes?.product_material}
+                Size: {product?.attributes?.size}
               </Typography>
-              <Typography sx={{ mt: "5px" }}>
-                size: {product?.attributes?.product_size}
-              </Typography>
-              <Typography sx={{ mt: "5px" }}>
+              {/* <Typography sx={{ mt: "5px" }}>
                 color: {product?.attributes?.product_color}
-              </Typography>
+              </Typography> */}
             </Box>
 
             <Box display="flex" alignItems="center" minHeight="50px">
@@ -140,17 +138,22 @@ const ItemDetails = ({ data }) => {
               </Box>
               <Button
                 sx={{
-                  backgroundColor: "#000",
-                  color: "#fff",
+                  color: "#000",
                   borderRadius: 0,
+                  border: "2px solid #000",
                   minWidth: "150px",
                   padding: "10px 40px",
                 }}
-                onClick={() =>
-                  dispatch(addToCart({ item: { ...product, count } }))
-                }
+                // onClick={() =>
+                //   dispatch(addToCart({ item: { ...product, count } }))
+                // }
               >
-                ADD TO CART
+                <a
+                  href={`https://api.whatsapp.com/send?phone=+2347033826580&text=${message}`}
+                  target="_blank"
+                >
+                  Buy product
+                </a>
               </Button>
             </Box>
             <Box>
@@ -167,14 +170,12 @@ const ItemDetails = ({ data }) => {
         <Box m="20px 0">
           <Tabs value={value} onChange={handleChange}>
             <Tab label="DESCRIPTION" value="description" />
-            <Tab label="REVIEWS" value="reviews" />
           </Tabs>
         </Box>
         <Box display="flex" flexWrap="wrap" gap="15px">
           {value === "description" && (
-            <div>{item?.attributes?.longDescription}</div>
+            <div> {product?.attributes?.description}</div>
           )}
-          {value === "reviews" && <div>reviews</div>}
         </Box>
 
         {/* RELATED ITEMS */}
@@ -205,7 +206,7 @@ const StyledItemsPage = styled.section`
   padding-top: 140px;
 
   .imageContainer {
-    background-color: red;
+    background-color: #c9bfbf60;
     position: relative;
     width: 100%;
     height: 50vh;

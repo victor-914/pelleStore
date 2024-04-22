@@ -16,6 +16,7 @@ import { addToCart } from "../../state";
 import { addToWishList } from "../../state/wishlist";
 
 const ProductCarousel = ({ data }) => {
+  console.log("🚀 ~ ProductCarousel ~ data:", data);
   const count = 1;
   const router = useRouter();
   const dispatch = useDispatch();
@@ -30,38 +31,38 @@ const ProductCarousel = ({ data }) => {
         autoPlay={false}
         swipeable={false}
         dynamicHeight={true}
-        renderArrowPrev={(onClickHandler, hasPrev, label) => (
-          <IconButton
-            onClick={onClickHandler}
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "0",
-              color: "#000",
-              padding: "5px",
-              zIndex: "10",
-            }}
-          >
-            <NavigateBeforeIcon sx={{ fontSize: 40 }} />
-          </IconButton>
-        )}
-        renderArrowNext={(onClickHandler, hasNext, label) => (
-          <IconButton
-            onClick={onClickHandler}
-            sx={{
-              position: "absolute",
-              top: "50%",
-              right: "0",
-              color: "#000",
-              padding: "5px",
-              zIndex: "10",
-            }}
-          >
-            <NavigateNextIcon sx={{ fontSize: 40 }} />
-          </IconButton>
-        )}
+        // renderArrowPrev={(onClickHandler, hasPrev, label) => (
+        //   <IconButton
+        //     onClick={onClickHandler}
+        //     sx={{
+        //       position: "absolute",
+        //       top: "50%",
+        //       left: "0",
+        //       color: "#000",
+        //       padding: "5px",
+        //       zIndex: "10",
+        //     }}
+        //   >
+        //     <NavigateBeforeIcon sx={{ fontSize: 40 }} />
+        //   </IconButton>
+        // )}
+        // renderArrowNext={(onClickHandler, hasNext, label) => (
+        //   <IconButton
+        //     onClick={onClickHandler}
+        //     sx={{
+        //       position: "absolute",
+        //       top: "50%",
+        //       right: "0",
+        //       color: "#000",
+        //       padding: "5px",
+        //       zIndex: "10",
+        //     }}
+        //   >
+        //     <NavigateNextIcon sx={{ fontSize: 40 }} />
+        //   </IconButton>
+        // )}
       >
-        {data?.attributes?.product_images?.data?.map((texture, index) => (
+        {data?.attributes?.images?.data?.map((texture, index) => (
           <>
             <main className="imgCarouselCont" key={`carousel-image-${index}`}>
               <div className="overlay"></div>
@@ -77,19 +78,21 @@ const ProductCarousel = ({ data }) => {
       </Carousel>
 
       <div class="showcase-content">
-
         <h3>
-          <p class="showcase-title">{data?.attributes?.product_name}</p>
+          <p class="showcase-title">Title: {data?.attributes?.title}</p>
         </h3>
 
         <div class="price-box">
-          <p class="price">&#x20A6;{data?.attributes?.product_discount_price}</p>
-          <del>&#x20A6;{data?.attributes?.product_price}</del>
+          <p class="price">Price: &#x20A6;{data?.attributes?.price}</p>
         </div>
       </div>
 
+      <h3>
+        <p class="showcase-title">Catergory: {data?.attributes?.catergory}</p>
+      </h3>
+
       <section className="accesoriesCont">
-        <div
+        {/* <div
           className="iconCont"
           onClick={() => {
             toast("Product Added to Cart", {
@@ -102,12 +105,12 @@ const ProductCarousel = ({ data }) => {
           title="Add to cart"
         >
           <FaShoppingCart className="icon" />
-        </div>
+        </div> */}
 
         <div
           className="iconCont"
           onClick={() => {
-            router.push(`/products/${data.id}`),
+            router.replace(`/products/${data.id}`),
               toast("Navigating to Product Page", {
                 hideProgressBar: true,
                 autoClose: 1000,
@@ -119,7 +122,7 @@ const ProductCarousel = ({ data }) => {
           <AiFillEye className="icon" />
         </div>
 
-        <div
+        {/* <div
           className="iconCont"
           onClick={() => {
             toast(" Added to Wishlist", {
@@ -132,7 +135,7 @@ const ProductCarousel = ({ data }) => {
           title="Add to wishlist"
         >
           <AiFillHeart className="icon" />
-        </div>
+        </div> */}
       </section>
     </StyledProductCarousel>
   );
@@ -192,6 +195,10 @@ const StyledProductCarousel = styled.section`
     visibility: visible;
   }
 
+
+  .showcase-content{
+  }
+
   .price-box {
     display: flex;
     padding: 5px;
@@ -200,11 +207,10 @@ const StyledProductCarousel = styled.section`
     /* justify-content: space-around; */
   }
 
-  .price{
+  .price {
     font-weight: 600;
     font-size: 14px;
     /* padding: 5px; */
-
   }
   .showcase-title {
     /* background-color: green; */
@@ -212,5 +218,4 @@ const StyledProductCarousel = styled.section`
     font-size: 16px;
     padding: 5px;
   }
-
 `;

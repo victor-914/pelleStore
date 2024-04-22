@@ -11,7 +11,7 @@ const Card = ({ title, imgSrc, page }) => {
     })}>
       <div className="title">{title}</div>
       <main className="imageHolder">
-        <Image src={imgSrc} layout="fill" />
+        <Image src={imgSrc} layout="fill"  objectFit="contain"/>
       </main>
       <div className="buttonContainer">
         <button className="viewButton">VIEW ALL</button>
